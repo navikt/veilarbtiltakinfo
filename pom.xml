@@ -66,27 +66,8 @@
             <artifactId>javax.servlet-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-tx</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ojdbc6</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-        </dependency>
-
-        <!--Test no.nav.fo.veilarbtiltakinfo.db-->
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
         </dependency>
 
         <!--Test-->
@@ -119,28 +100,8 @@
             <artifactId>logback-classic</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-library</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>au.com.dius</groupId>
-            <artifactId>pact-jvm-model</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>au.com.dius</groupId>
-            <artifactId>pact-jvm-consumer_2.12</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>au.com.dius</groupId>
-            <artifactId>pact-jvm-consumer-junit_2.12</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>au.com.dius</groupId>
-            <artifactId>pact-jvm-consumer-junit5_2.12</artifactId>
         </dependency>
 
     </dependencies>

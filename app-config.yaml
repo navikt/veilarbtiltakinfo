@@ -1,5 +1,6 @@
 # ref https://raw.githubusercontent.com/nais/naisd/master/nais_example.yaml
 image: docker.adeo.no:5000/fo/veilarbtiltakinfo
+team: kartlegging
 replicas:
   min: 2
   max: 4
@@ -35,6 +36,8 @@ fasitResources:
     resourceType: restservice
   - alias: abac.pdp.endpoint
     resourceType: restservice
+  - alias: appdynamics
+    resourceType: applicationproperties
 
   # oidc med AzureAD B2C
   - alias: aad_b2c_clientid
