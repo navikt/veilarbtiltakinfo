@@ -1,0 +1,62 @@
+# ref https://raw.githubusercontent.com/nais/naisd/master/nais_example.yaml
+image: docker.adeo.no:5000/fo/veilarbtiltakinfo
+replicas:
+  min: 2
+  max: 4
+  cpuThresholdPercentage: 50
+port: 8080
+webproxy: true
+healthcheck:
+  liveness:
+    path: veilarbtiltakinfo/internal/isAlive
+    initialDelay: 60
+  readiness:
+    path: veilarbtiltakinfo/internal/selftest
+    initialDay: 60
+prometheus:
+  enabled: true
+  path: veilarbtiltakinfo/internal/metrics
+resources:
+  limits:
+    cpu: 500m
+    memory: 1024Mi
+  requests:
+    cpu: 200m
+    memory: 512Mi
+fasitResources:
+  used:
+  - alias: loadbalancer:veilarbtiltakinfo
+    resourceType: loadbalancerconfig
+  - alias: srvveilarbtiltakinfo
+    resourceType: credential
+  - alias: securityTokenService
+    resourceType: baseUrl
+  - alias: veilArbOppfolgingAPI
+    resourceType: restservice
+  - alias: abac.pdp.endpoint
+    resourceType: restservice
+
+  # oidc med AzureAD B2C
+  - alias: aad_b2c_clientid
+    resourceType: credential
+  - alias: aad_b2c_discovery
+    resourceType: baseurl
+
+  # ISSO
+  - alias: isso-host
+    resourceType: baseurl
+  - alias: isso-jwks
+    resourceType: baseurl
+  - alias: isso-issuer
+    resourceType: baseurl
+  - alias: isso.isalive
+    resourceType: baseurl
+  - alias: isso-rp-user
+    resourceType: credential
+  - alias: veilarblogin.redirect-url
+    resourceType: baseurl
+
+  exposed:
+  - alias: veilarbtiltakinfoRS
+    resourceType: restservice
+    path: /veilarbtiltakinfo/api
