@@ -19,11 +19,7 @@ prometheus:
   path: veilarbtiltakinfo/internal/metrics
 resources:
   limits:
-    cpu: 500m
-    memory: 1024Mi
-  requests:
-    cpu: 200m
-    memory: 512Mi
+    cpu: 3
 fasitResources:
   used:
   - alias: loadbalancer:veilarbtiltakinfo
