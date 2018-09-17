@@ -1,4 +1,4 @@
-package no.nav.fo.veilarbtiltakinfo.config;
+package no.nav.fo.veilarbtiltakinfo;
 
 import lombok.Data;
 import lombok.experimental.Accessors;

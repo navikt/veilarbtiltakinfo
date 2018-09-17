@@ -11,6 +11,7 @@ import javax.servlet.ServletContext;
 @Configuration
 @Import({
     PepConfig.class,
+    OppfolgingClient.class
 })
 public class ApplicationConfig implements NaisApiApplication {
 
