@@ -1,48 +1,39 @@
 package no.nav.fo.veilarbtiltakinfo.client;
 
-import no.nav.fo.veilarbtiltakinfo.ServiceGruppeKode;
-import no.nav.fo.veilarbtiltakinfo.ServiceGruppeKodeDto;
+import no.nav.common.auth.SubjectHandler;
 import no.nav.sbl.rest.RestUtils;
 import org.springframework.stereotype.Component;
 
-import javax.ws.rs.client.Client;
-import java.util.function.Function;
-
+import static javax.ws.rs.core.HttpHeaders.COOKIE;
+import static no.nav.brukerdialog.security.oidc.provider.AzureADB2CProvider.AZUREADB2C_OIDC_COOKIE_NAME;
+import static no.nav.common.auth.SsoToken.Type.OIDC;
 import static no.nav.sbl.util.EnvironmentUtils.getRequiredProperty;
 
 @Component
 public class OppfolgingClient {
 
     public static final String VEILARBOPPFOLGINGAPI_URL_PROPERTY_NAME = "VEILARBOPPFOLGINGAPI_URL";
-    public static final String FNR_QUERY_PARAM = "fnr";
 
     private final String veilarboppfolgingTarget;
-    private final SystemUserAuthorizationInterceptor systemUserAuthorizationInterceptor;
 
     @SuppressWarnings("unused")
-    public OppfolgingClient() {
-        this(getRequiredProperty(VEILARBOPPFOLGINGAPI_URL_PROPERTY_NAME), new SystemUserAuthorizationInterceptor());
+    OppfolgingClient() {
+        this(getRequiredProperty(VEILARBOPPFOLGINGAPI_URL_PROPERTY_NAME));
     }
 
-    OppfolgingClient(String veilarboppfolgingTarget, SystemUserAuthorizationInterceptor systemUserAuthorizationInterceptor) {
+    OppfolgingClient(String veilarboppfolgingTarget) {
         this.veilarboppfolgingTarget = veilarboppfolgingTarget;
-        this.systemUserAuthorizationInterceptor = systemUserAuthorizationInterceptor;
     }
 
-
-    public ServiceGruppeKode serviceGruppeKode(String fnr) {
-        ServiceGruppeKodeDto serviceGruppeKode = withClient(c -> c.target(veilarboppfolgingTarget + "/oppfolging")
-                        .queryParam(FNR_QUERY_PARAM, fnr)
-                        .request()
-                        .get(ServiceGruppeKodeDto.class)
+    public OppfolgingStatus serviceGruppeKode(String fnr) {
+        OppfolgingStatus serviceGruppeKode = RestUtils.withClient(
+            c -> c.target(veilarboppfolgingTarget + "/person/" + fnr + "/oppfolgingsstatus"
+            )
+            .request()
+            .header(COOKIE, AZUREADB2C_OIDC_COOKIE_NAME + "=" + SubjectHandler.getSsoToken(OIDC).orElseThrow(IllegalArgumentException::new))
+            .get(OppfolgingStatus.class)
         );
-        return serviceGruppeKode.getServiceGruppeKode();
+        return serviceGruppeKode;
     }
 
-    <T> T withClient(Function<Client, T> function) {
-        return RestUtils.withClient(c -> {
-            c.register(systemUserAuthorizationInterceptor);
-            return function.apply(c);
-        });
-    }
 }
