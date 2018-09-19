@@ -17,7 +17,7 @@ public class TiltakinfoRS {
     private TiltakService tiltakService;
 
     @GET
-    @Path("arbeidsledig")
+    @Path("servicegruppekode")
     public OppfolgingStatus hentServiceGruppeKode() {
         return tiltakService.hentServiceGruppe();
     }
