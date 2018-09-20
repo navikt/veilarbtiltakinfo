@@ -1,5 +1,6 @@
+package no.nav.fo.veilarbtiltakinfo;
+
 import no.nav.brukerdialog.security.Constants;
-import no.nav.brukerdialog.tools.SecurityConstants;
 import no.nav.dialogarena.config.fasit.FasitUtils;
 import no.nav.dialogarena.config.fasit.ServiceUser;
 import no.nav.dialogarena.config.util.Util;
@@ -19,10 +20,9 @@ import static no.nav.sbl.dialogarena.common.abac.pep.service.AbacServiceConfig.A
 public class MainTest {
 
     private static final String PORT = "8800";
+    public static final String APPLICATION_NAME = "veilarbtiltakinfo";
 
     public static void main(String[] args) throws Exception {
-        final String APPLICATION_NAME = "veilarbtiltakinfo";
-
         ApiAppTest.setupTestContext(ApiAppTest.Config.builder().applicationName(APPLICATION_NAME).build());
 
         ServiceUser srvveilarbtiltakinfo = FasitUtils.getServiceUser("srvveilarbtiltakinfo", APPLICATION_NAME);
