@@ -94,6 +94,10 @@
             <groupId>no.nav.common</groupId>
             <artifactId>auth</artifactId>
         </dependency>
+        <dependency>
+            <groupId>no.nav.sbl.dialogarena</groupId>
+            <artifactId>common-cxf</artifactId>
+        </dependency>
 
         <!--Test no.nav.fo.veilarbtiltakinfo.db-->
         <dependency>
