@@ -43,11 +43,13 @@ public class MainTest {
         String issoHost = FasitUtils.getBaseUrl("isso-host");
         ServiceUser isso_rp_user = FasitUtils.getServiceUser("isso-rp-user", APPLICATION_NAME);
         String issoIsAlive = FasitUtils.getBaseUrl("isso.isalive", FasitUtils.Zone.FSS);
+        String issoIssuer = FasitUtils.getBaseUrl("isso-issuer");
         setProperty(Constants.ISSO_JWKS_URL_PROPERTY_NAME, issoJWS);
         setProperty(Constants.ISSO_HOST_URL_PROPERTY_NAME, issoHost);
         setProperty(Constants.ISSO_RP_USER_USERNAME_PROPERTY_NAME, isso_rp_user.getUsername());
         setProperty(Constants.ISSO_RP_USER_PASSWORD_PROPERTY_NAME, isso_rp_user.getPassword());
         setProperty(Constants.ISSO_ISALIVE_URL_PROPERTY_NAME, issoIsAlive);
+        setProperty(Constants.ISSO_ISSUER_URL_PROPERTY_NAME, issoIssuer);
 
         setProperty(CredentialConstants.SYSTEMUSER_USERNAME, srvveilarbtiltakinfo.getUsername());
         setProperty(CredentialConstants.SYSTEMUSER_PASSWORD, srvveilarbtiltakinfo.getPassword());
