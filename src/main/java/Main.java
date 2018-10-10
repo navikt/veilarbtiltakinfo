@@ -1,5 +1,3 @@
-package no.nav.fo.veilarbtiltakinfo;
-
 import no.nav.apiapp.ApiApp;
 import no.nav.fo.veilarbtiltakinfo.config.ApplicationConfig;
 

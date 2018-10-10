@@ -1,5 +1,3 @@
-package no.nav.fo.veilarbtiltakinfo;
-
 import no.nav.brukerdialog.security.Constants;
 import no.nav.dialogarena.config.fasit.FasitUtils;
 import no.nav.dialogarena.config.fasit.ServiceUser;
