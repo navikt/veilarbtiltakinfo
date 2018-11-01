@@ -25,7 +25,7 @@ public class MainTest {
 
         ServiceUser srvveilarbtiltakinfo = FasitUtils.getServiceUser("srvveilarbtiltakinfo", APPLICATION_NAME);
 
-        String loginUrl = FasitUtils.getBaseUrl("veilarblogin.redirect-url", FasitUtils.Zone.FSS);
+        String loginUrl = FasitUtils.getRestService("veilarblogin.redirect-url", getDefaultEnvironment()).getUrl();
         setProperty(ApplicationConfig.VEILARBLOGIN_REDIRECT_URL_URL, loginUrl);
 
         String securityTokenService = FasitUtils.getBaseUrl("securityTokenService", FSS);
