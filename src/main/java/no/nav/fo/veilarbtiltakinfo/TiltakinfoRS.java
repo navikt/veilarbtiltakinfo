@@ -2,7 +2,7 @@ package no.nav.fo.veilarbtiltakinfo;
 
 import no.nav.apiapp.security.PepClient;
 import no.nav.common.auth.SubjectHandler;
-import no.nav.fo.veilarbtiltakinfo.client.OppfolgingStatus;
+import no.nav.fo.veilarbtiltakinfo.client.Oppfolgingsstatus;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
@@ -32,10 +32,10 @@ public class TiltakinfoRS {
 
     @GET
     @Path("servicegruppekode")
-    public OppfolgingStatus hentServiceGruppeKode() {
+    public Oppfolgingsstatus hentOppfolgingsstatus() {
         String fnr = getFnr();
         pepClient.sjekkLeseTilgangTilFnr(fnr);
-        return tiltakService.hentServiceGruppe(fnr);
+        return tiltakService.hentOppfolgingsstatus(fnr);
     }
 
     private String getFnr() {

@@ -21,19 +21,19 @@ public class OppfolgingClient {
         this(getRequiredProperty(VEILARBOPPFOLGINGAPI_URL_PROPERTY_NAME));
     }
 
-    OppfolgingClient(String veilarboppfolgingTarget) {
+    private OppfolgingClient(String veilarboppfolgingTarget) {
         this.veilarboppfolgingTarget = veilarboppfolgingTarget;
     }
 
-    public OppfolgingStatus serviceGruppeKode(String fnr) {
-        OppfolgingStatus serviceGruppeKode = RestUtils.withClient(
+    public Oppfolgingsstatus oppfolgingsstatus(String fnr) {
+        Oppfolgingsstatus oppfolgingsstatus = RestUtils.withClient(
             c -> c.target(veilarboppfolgingTarget + "/person/" + fnr + "/oppfolgingsstatus"
             )
-            .request()
-            .header(COOKIE, AZUREADB2C_OIDC_COOKIE_NAME + "=" + SubjectHandler.getSsoToken(OIDC).orElseThrow(IllegalArgumentException::new))
-            .get(OppfolgingStatus.class)
+                .request()
+                .header(COOKIE, AZUREADB2C_OIDC_COOKIE_NAME + "=" + SubjectHandler.getSsoToken(OIDC).orElseThrow(IllegalArgumentException::new))
+                .get(Oppfolgingsstatus.class)
         );
-        return serviceGruppeKode;
+        return oppfolgingsstatus;
     }
 
 }
