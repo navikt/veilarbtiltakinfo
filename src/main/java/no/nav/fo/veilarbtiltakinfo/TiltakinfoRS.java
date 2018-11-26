@@ -30,8 +30,17 @@ public class TiltakinfoRS {
     @Inject
     private PepClient pepClient;
 
+    @Deprecated
     @GET
     @Path("servicegruppekode")
+    public Oppfolgingsstatus hentServiceGruppeKode() {
+        String fnr = getFnr();
+        pepClient.sjekkLeseTilgangTilFnr(fnr);
+        return tiltakService.hentOppfolgingsstatus(fnr);
+    }
+
+    @GET
+    @Path("oppfolgingsstatus")
     public Oppfolgingsstatus hentOppfolgingsstatus() {
         String fnr = getFnr();
         pepClient.sjekkLeseTilgangTilFnr(fnr);
