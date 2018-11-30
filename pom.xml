@@ -4,9 +4,9 @@
 
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>no.nav.sbl</groupId>
+        <groupId>no.nav.common</groupId>
         <artifactId>mor-pom</artifactId>
-        <version>2018.10.04.15.02</version>
+        <version>2018.11.28.20.34</version>
     </parent>
 
     <groupId>no.nav.fo</groupId>
@@ -26,9 +26,9 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>no.nav.sbl</groupId>
+                <groupId>no.nav.common</groupId>
                 <artifactId>bom</artifactId>
-                <version>2018.10.04.15.02</version>
+                <version>2018.11.28.20.34</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -37,23 +37,23 @@
 
     <dependencies>
         <dependency>
-            <groupId>no.nav.sbl</groupId>
+            <groupId>no.nav.common</groupId>
             <artifactId>api-app</artifactId>
         </dependency>
         <dependency>
-            <groupId>no.nav.sbl.dialogarena</groupId>
-            <artifactId>common-abac</artifactId>
+            <groupId>no.nav.common</groupId>
+            <artifactId>abac</artifactId>
         </dependency>
         <dependency>
-            <groupId>no.nav.sbl</groupId>
+            <groupId>no.nav.common</groupId>
             <artifactId>util</artifactId>
         </dependency>
         <dependency>
-            <groupId>no.nav.sbl.dialogarena</groupId>
+            <groupId>no.nav.common</groupId>
             <artifactId>test-config</artifactId>
         </dependency>
         <dependency>
-            <groupId>no.nav.dialogarena</groupId>
+            <groupId>no.nav.common</groupId>
             <artifactId>oidc-security</artifactId>
         </dependency>
         <dependency>
@@ -77,7 +77,7 @@
             <artifactId>javax.ws.rs-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>no.nav.sbl</groupId>
+            <groupId>no.nav.common</groupId>
             <artifactId>rest</artifactId>
         </dependency>
         <dependency>
@@ -85,8 +85,8 @@
             <artifactId>auth</artifactId>
         </dependency>
         <dependency>
-            <groupId>no.nav.sbl.dialogarena</groupId>
-            <artifactId>common-cxf</artifactId>
+            <groupId>no.nav.common</groupId>
+            <artifactId>cxf</artifactId>
         </dependency>
         <dependency>
             <groupId>no.nav.fo</groupId>
@@ -96,7 +96,7 @@
 
         <!--Test-->
         <dependency>
-            <groupId>no.nav.sbl</groupId>
+            <groupId>no.nav.common</groupId>
             <artifactId>fasit</artifactId>
         </dependency>
     </dependencies>
