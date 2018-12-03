@@ -6,11 +6,14 @@ import no.nav.fo.veilarbtiltakinfo.TiltakService;
 import no.nav.fo.veilarbtiltakinfo.TiltakinfoRS;
 import no.nav.fo.veilarbtiltakinfo.client.OppfolgingClient;
 import no.nav.fo.veilarbtiltakinfo.client.OppfolgingClientHelseSjekk;
+import no.nav.fo.veilarbtiltakinfo.takontaktmedmeg.TaKontaktMedMegDao;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.inject.Inject;
 import javax.servlet.ServletContext;
+import javax.sql.DataSource;
 
 @Configuration
 @Import({
@@ -18,15 +21,22 @@ import javax.servlet.ServletContext;
     OppfolgingClient.class,
     OppfolgingClientHelseSjekk.class,
     TiltakService.class,
-    TiltakinfoRS.class
+    TiltakinfoRS.class,
+    DataSourceConfig.class,
+    DataSourceHelsesjekk.class,
+    TaKontaktMedMegDao.class
 })
 public class ApplicationConfig implements NaisApiApplication {
 
     public static final String VEILARBLOGIN_REDIRECT_URL_URL = "VEILARBLOGIN_REDIRECT_URL_URL";
 
+    @Inject
+    private DataSource dataSource;
+
     @Transactional
     @Override
     public void startup(ServletContext servletContext) {
+        MigrationUtils.createTables(dataSource);
     }
 
     @Override
