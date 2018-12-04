@@ -38,6 +38,8 @@ fasitResources:
     resourceType: restservice
   - alias: appdynamics
     resourceType: applicationproperties
+  - alias: veilarbtiltakinfoDB
+    resourceType: datasource
 
   # oidc med AzureAD B2C
   - alias: aad_b2c_clientid
