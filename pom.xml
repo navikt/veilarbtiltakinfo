@@ -88,11 +88,6 @@
             <groupId>no.nav.common</groupId>
             <artifactId>cxf</artifactId>
         </dependency>
-        <dependency>
-            <groupId>no.nav.fo</groupId>
-            <artifactId>veilarboppfolging-common</artifactId>
-            <version>1065.20180129.1818</version>
-        </dependency>
 
         <!--Test-->
         <dependency>
