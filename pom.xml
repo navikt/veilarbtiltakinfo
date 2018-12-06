@@ -6,7 +6,7 @@
     <parent>
         <groupId>no.nav.common</groupId>
         <artifactId>mor-pom</artifactId>
-        <version>2018.11.28.20.34</version>
+        <version>2018.12.03.14.10</version>
     </parent>
 
     <groupId>no.nav.fo</groupId>
@@ -28,7 +28,7 @@
             <dependency>
                 <groupId>no.nav.common</groupId>
                 <artifactId>bom</artifactId>
-                <version>2018.11.28.20.34</version>
+                <version>2018.12.03.14.10</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -89,11 +89,6 @@
             <artifactId>cxf</artifactId>
         </dependency>
         <dependency>
-            <groupId>no.nav.fo</groupId>
-            <artifactId>veilarboppfolging-common</artifactId>
-            <version>1065.20180129.1818</version>
-        </dependency>
-        <dependency>
             <groupId>no.nav.common</groupId>
             <artifactId>jdbc</artifactId>
         </dependency>
@@ -102,7 +97,6 @@
             <artifactId>flyway-core</artifactId>
             <scope>compile</scope>
         </dependency>
-
 
 
         <!--Test-->
