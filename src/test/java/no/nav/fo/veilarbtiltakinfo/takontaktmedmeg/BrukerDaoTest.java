@@ -6,19 +6,19 @@ import org.junit.Test;
 
 import javax.inject.Inject;
 
-public class TaKontaktMedMegDaoDatabaseTest extends DatabaseTest {
+public class BrukerDaoTest extends DatabaseTest {
 
     @Inject
-    private TaKontaktMedMegDao taKontaktMedMegDao;
+    private BrukerDao brukerDao;
 
     @BeforeClass
     public static void startSpring() {
-        setupContext(TaKontaktMedMegDao.class);
+        setupContext(BrukerDao.class);
     }
 
     @Test
     public void skalOppretteKontaktInfo() {
-        taKontaktMedMegDao.create(brukerKontakt());
+        brukerDao.create(brukerKontakt());
     }
 
     private Bruker brukerKontakt() {

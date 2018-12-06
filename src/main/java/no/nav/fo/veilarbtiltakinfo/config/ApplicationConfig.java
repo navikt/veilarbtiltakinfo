@@ -6,7 +6,7 @@ import no.nav.fo.veilarbtiltakinfo.TiltakService;
 import no.nav.fo.veilarbtiltakinfo.TiltakinfoRS;
 import no.nav.fo.veilarbtiltakinfo.client.OppfolgingClient;
 import no.nav.fo.veilarbtiltakinfo.client.OppfolgingClientHelseSjekk;
-import no.nav.fo.veilarbtiltakinfo.takontaktmedmeg.TaKontaktMedMegDao;
+import no.nav.fo.veilarbtiltakinfo.takontaktmedmeg.BrukerDao;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +24,7 @@ import javax.sql.DataSource;
     TiltakinfoRS.class,
     DataSourceConfig.class,
     DataSourceHelsesjekk.class,
-    TaKontaktMedMegDao.class
+    BrukerDao.class
 })
 public class ApplicationConfig implements NaisApiApplication {
 

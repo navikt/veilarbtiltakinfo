@@ -13,14 +13,14 @@ import java.time.chrono.ChronoZonedDateTime;
 
 import static java.util.Optional.of;
 
-public class TaKontaktMedMegDao {
+public class BrukerDao {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(TaKontaktMedMegDao.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(BrukerDao.class);
 
     private Database database;
 
     @Inject
-    public TaKontaktMedMegDao(Database database) {
+    public BrukerDao(Database database) {
         this.database = database;
     }
 
