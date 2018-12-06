@@ -1,4 +1,4 @@
-package no.nav.fo.veilarbtiltakinfo.takontaktmedmeg;
+package no.nav.fo.veilarbtiltakinfo.bruker;
 
 import lombok.Builder;
 import lombok.Value;

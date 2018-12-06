@@ -1,4 +1,4 @@
-package no.nav.fo.veilarbtiltakinfo.takontaktmedmeg;
+package no.nav.fo.veilarbtiltakinfo.bruker;
 
 import no.nav.sbl.jdbc.Database;
 import org.slf4j.Logger;

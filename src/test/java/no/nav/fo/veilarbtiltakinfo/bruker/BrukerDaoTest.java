@@ -1,4 +1,4 @@
-package no.nav.fo.veilarbtiltakinfo.takontaktmedmeg;
+package no.nav.fo.veilarbtiltakinfo.bruker;
 
 import no.nav.fo.veilarbtiltakinfo.DatabaseTest;
 import org.junit.BeforeClass;
