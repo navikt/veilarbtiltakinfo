@@ -48,7 +48,7 @@ public class BrukerDao {
             bruker.getTiltakTo()
         );
 
-        LOGGER.info("lagret kartlegging med id={}", brukerId);
+        LOGGER.info("lagret bruker med id={}", brukerId);
     }
 
 }
