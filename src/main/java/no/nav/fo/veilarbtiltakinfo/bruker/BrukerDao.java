@@ -27,10 +27,6 @@ public class BrukerDao {
     @Transactional
     public void create(Bruker bruker) {
         long brukerId = database.nesteFraSekvens("BRUKER_SEQ");
-        Instant brukerTidspunkt = of(Instant.now())
-            .map(d -> d.atZone(ZoneId.of("Europe/Oslo")))
-            .map(ChronoZonedDateTime::toInstant)
-            .orElse(null);
         database.update("INSERT INTO BRUKER (" +
                 "bruker_id, " +
                 "bruker_tidspunkt, " +
@@ -41,9 +37,8 @@ public class BrukerDao {
                 "maal, " +
                 "tiltakEn, " +
                 "tiltakTo) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                "VALUES (?, CURRENT_TIMESTAMP, ?, ?, ?, ?, ?, ?, ?)",
             brukerId,
-            Timestamp.from(brukerTidspunkt),
             bruker.getFnr(),
             bruker.getOppfolgingsEnhetId(),
             bruker.getOppfolgingsEnhetNavn(),
