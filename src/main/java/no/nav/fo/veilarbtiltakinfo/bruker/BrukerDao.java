@@ -31,12 +31,12 @@ public class BrukerDao {
                 "bruker_id, " +
                 "bruker_tidspunkt, " +
                 "fnr, " +
-                "oppfolgingsEnhetId, " +
-                "oppfolgingsEnhetNavn, " +
+                "oppfolgingsenhet_id, " +
+                "oppfolgingsenhet_navn, " +
                 "under_oppfolging, " +
                 "maal, " +
-                "tiltakEn, " +
-                "tiltakTo) " +
+                "tiltak_en, " +
+                "tiltak_to) " +
                 "VALUES (?, CURRENT_TIMESTAMP, ?, ?, ?, ?, ?, ?, ?)",
             brukerId,
             bruker.getFnr(),
