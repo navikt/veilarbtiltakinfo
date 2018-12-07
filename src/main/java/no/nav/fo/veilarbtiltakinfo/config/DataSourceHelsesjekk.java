@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
 
-import static no.nav.fo.veilarbtiltakinfo.config.DataSourceConfig.VEILARBTILTAKINFO_URL;
+import static no.nav.fo.veilarbtiltakinfo.config.DataSourceConfig.VEILARBTILTAKINFODB_URL;
 import static no.nav.sbl.util.EnvironmentUtils.getRequiredProperty;
 
 @Component
@@ -27,7 +27,7 @@ public class DataSourceHelsesjekk implements Helsesjekk {
 
     @Override
     public HelsesjekkMetadata getMetadata() {
-        String databaseUri = getRequiredProperty(VEILARBTILTAKINFO_URL);
+        String databaseUri = getRequiredProperty(VEILARBTILTAKINFODB_URL);
         return new HelsesjekkMetadata(
             "db",
             "Database: " + databaseUri,

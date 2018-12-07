@@ -18,16 +18,16 @@ import static no.nav.sbl.util.EnvironmentUtils.getRequiredProperty;
 @EnableTransactionManagement
 public class DataSourceConfig {
 
-    public static final String VEILARBTILTAKINFO_URL = "VEILARBTILTAKINFO_URL";
-    public static final String VEILARBTILTAKINFO_USERNAME = "VEILARBTILTAKINFO_USERNAME";
-    public static final String VEILARBTILTAKINFO_PASSWORD = "VEILARBJOBBSOKERKOMPETANSEDB_PASSWORD";
+    public static final String VEILARBTILTAKINFODB_URL = "VEILARBTILTAKINFODB_URL";
+    public static final String VEILARBTILTAKINFODB_USERNAME = "VEILARBTILTAKINFODB_USERNAME";
+    public static final String VEILARBTILTAKINFODB_PASSWORD = "VEILARBTILTAKINFODB_PASSWORD";
 
     @Bean
     public DataSource dataSource() {
         return DataSourceFactory.dataSource()
-            .url(getRequiredProperty(VEILARBTILTAKINFO_URL))
-            .username(getRequiredProperty(VEILARBTILTAKINFO_USERNAME))
-            .password(getOptionalProperty(VEILARBTILTAKINFO_PASSWORD).orElse(""))
+            .url(getRequiredProperty(VEILARBTILTAKINFODB_URL))
+            .username(getRequiredProperty(VEILARBTILTAKINFODB_USERNAME))
+            .password(getOptionalProperty(VEILARBTILTAKINFODB_PASSWORD).orElse(""))
             .build();
     }
 

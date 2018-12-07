@@ -6,13 +6,13 @@ import static no.nav.fo.veilarbtiltakinfo.config.DataSourceConfig.*;
 
 public class DatabaseTestContext {
 
-    public static void setDataSourceProperties(DbCredentials dbCredentials) {
-        System.setProperty(VEILARBTILTAKINFO_URL, dbCredentials.url);
-        System.setProperty(VEILARBTILTAKINFO_USERNAME, dbCredentials.getUsername());
-        System.setProperty(VEILARBTILTAKINFO_PASSWORD, dbCredentials.getPassword());
+    static void setDataSourceProperties(DbCredentials dbCredentials) {
+        System.setProperty(VEILARBTILTAKINFODB_URL, dbCredentials.url);
+        System.setProperty(VEILARBTILTAKINFODB_USERNAME, dbCredentials.getUsername());
+        System.setProperty(VEILARBTILTAKINFODB_PASSWORD, dbCredentials.getPassword());
     }
 
-    public static void setInMemoryDataSourceProperties() {
+    static void setInMemoryDataSourceProperties() {
         setDataSourceProperties(inMemoryConfig());
     }
 
