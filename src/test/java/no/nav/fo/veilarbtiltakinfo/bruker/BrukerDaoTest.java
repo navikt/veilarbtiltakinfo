@@ -17,11 +17,11 @@ public class BrukerDaoTest extends DatabaseTest {
     }
 
     @Test
-    public void skalOppretteKontaktInfo() {
-        brukerDao.create(brukerKontakt());
+    public void skalOppretteBruker() {
+        brukerDao.opprett(bruker());
     }
 
-    private Bruker brukerKontakt() {
+    private Bruker bruker() {
         return Bruker.builder()
             .fnr("11111111111")
             .oppfolgingsEnhetId("0219")

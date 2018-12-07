@@ -25,7 +25,7 @@ public class BrukerDao {
     }
 
     @Transactional
-    public void create(Bruker bruker) {
+    public void opprett(Bruker bruker) {
         long brukerId = database.nesteFraSekvens("BRUKER_SEQ");
         database.update("INSERT INTO BRUKER (" +
                 "bruker_id, " +
