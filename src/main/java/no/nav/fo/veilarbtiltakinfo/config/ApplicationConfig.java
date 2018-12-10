@@ -4,6 +4,7 @@ import no.nav.apiapp.ApiApplication.NaisApiApplication;
 import no.nav.apiapp.config.ApiAppConfigurator;
 import no.nav.fo.veilarbtiltakinfo.TiltakService;
 import no.nav.fo.veilarbtiltakinfo.TiltakinfoRS;
+import no.nav.fo.veilarbtiltakinfo.bruker.TiltakDao;
 import no.nav.fo.veilarbtiltakinfo.client.OppfolgingClient;
 import no.nav.fo.veilarbtiltakinfo.client.OppfolgingClientHelseSjekk;
 import no.nav.fo.veilarbtiltakinfo.bruker.BrukerDao;
@@ -24,7 +25,8 @@ import javax.sql.DataSource;
     TiltakinfoRS.class,
     DataSourceConfig.class,
     DataSourceHelsesjekk.class,
-    BrukerDao.class
+    BrukerDao.class,
+    TiltakDao.class,
 })
 public class ApplicationConfig implements NaisApiApplication {
 

@@ -9,8 +9,6 @@ CREATE TABLE BRUKER (
   oppfolgingsenhet_navn NVARCHAR2(255) NOT NULL,
   under_oppfolging      NUMBER(1, 0)   NOT NULL,
   maal                  NVARCHAR2(255),
-  tiltak_en             NVARCHAR2(255) NOT NULL,
-  tiltak_to             NVARCHAR2(255) NOT NULL,
   CONSTRAINT BRUKER_PK PRIMARY KEY (bruker_id)
 );
 
