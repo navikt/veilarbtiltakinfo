@@ -3,7 +3,6 @@ package no.nav.fo.veilarbtiltakinfo.bruker;
 import no.nav.sbl.jdbc.Database;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.sql.Timestamp;
@@ -24,7 +23,6 @@ public class BrukerDao {
         this.database = database;
     }
 
-    @Transactional
     public void opprett(Bruker bruker) {
         long brukerId = database.nesteFraSekvens("BRUKER_SEQ");
         database.update("INSERT INTO BRUKER (" +
