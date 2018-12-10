@@ -21,7 +21,7 @@ public class BrukerDaoTest extends DatabaseTest {
         brukerDao.opprett(bruker());
     }
 
-    private Bruker bruker() {
+    static Bruker bruker() {
         return Bruker.builder()
             .fnr("11111111111")
             .oppfolgingsEnhetId("0219")
