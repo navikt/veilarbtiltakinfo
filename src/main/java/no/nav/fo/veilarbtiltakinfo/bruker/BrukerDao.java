@@ -23,7 +23,7 @@ public class BrukerDao {
         this.database = database;
     }
 
-    public void opprett(Bruker bruker) {
+    long opprett(Bruker bruker) {
         long brukerId = database.nesteFraSekvens("BRUKER_SEQ");
         database.update("INSERT INTO BRUKER (" +
                 "bruker_id, " +
@@ -47,6 +47,8 @@ public class BrukerDao {
         );
 
         LOGGER.info("lagret bruker med id={}", brukerId);
+
+        return brukerId;
     }
 
 }
