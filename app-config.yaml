@@ -65,3 +65,6 @@ fasitResources:
   - alias: veilarbtiltakinfoRS
     resourceType: restservice
     path: /veilarbtiltakinfo/api
+
+alertProfiles:
+  - pus-decorator
