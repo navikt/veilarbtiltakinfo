@@ -10,8 +10,7 @@ import java.util.stream.Collectors;
 
 import static no.nav.fo.veilarbtiltakinfo.bruker.BrukerDaoTest.bruker;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsInAnyOrder;
-import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.*;
 
 public class TiltakDaoTest extends DatabaseTest {
 
@@ -34,20 +33,20 @@ public class TiltakDaoTest extends DatabaseTest {
 
         List<Tiltak> tiltakFraDb = tiltakDao.hentTiltak(tiltakId);
 
+        assertThat(tiltakFraDb, hasSize(1));
         assertThat(tiltakFraDb.get(0).getNokkel(), equalTo(tiltak.getNokkel()));
     }
 
     @Test
     public void skalOppretteOgHenteTiltakForBruker() {
-        long brukerId = brukerDao.opprett(bruker());
-        Tiltak tiltakEn = tiltak("tiltak-tilrettelegging");
-        Tiltak tiltakTo = tiltak("tiltak-arbeidsrettet-rehabilitering");
-        tiltakDao.opprett(brukerId, tiltakEn);
-        tiltakDao.opprett(brukerId, tiltakTo);
+        Bruker bruker = bruker();
+        List<String> tiltak = bruker.getTiltak().stream().map(Tiltak::getNokkel).collect(Collectors.toList());
+        long brukerId = brukerDao.opprett(bruker);
 
         List<String> tiltakNoklerFraDb = tiltakDao.hentTiltakForBruker(brukerId).stream().map(Tiltak::getNokkel).collect(Collectors.toList());
 
-        assertThat(tiltakNoklerFraDb, containsInAnyOrder(tiltakEn.getNokkel(), tiltakTo.getNokkel()));
+        assertThat(tiltakNoklerFraDb, hasSize(2));
+        assertThat(tiltakNoklerFraDb, containsInAnyOrder(tiltak.toArray()));
     }
 
     private Tiltak tiltak(String nokkel) {
