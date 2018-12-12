@@ -8,7 +8,6 @@ En tilknyttet database lagrer brukeres besvarelser og det eksponeres REST-endepu
 Spørsmål knyttet til koden kan rettes mot:
  
 * Johan Rusvik, Johan.Rusvik@nav.no
-* Nina Kjekstad, Nina.Kjekstad@nav.no
 * Terese Haug, Terese.Haug@nav.no
 
 For NAV-interne henvendelser kan Slack-kanalen #team-kartlegging benyttes.

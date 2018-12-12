@@ -88,12 +88,32 @@
             <groupId>no.nav.common</groupId>
             <artifactId>cxf</artifactId>
         </dependency>
+        <dependency>
+            <groupId>no.nav.common</groupId>
+            <artifactId>jdbc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+            <scope>compile</scope>
+        </dependency>
+
 
         <!--Test-->
         <dependency>
             <groupId>no.nav.common</groupId>
             <artifactId>fasit</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-library</artifactId>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
 </project>
