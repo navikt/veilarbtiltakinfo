@@ -2,7 +2,7 @@ package no.nav.fo.veilarbtiltakinfo.config;
 
 import no.nav.apiapp.ApiApplication.NaisApiApplication;
 import no.nav.apiapp.config.ApiAppConfigurator;
-import no.nav.fo.veilarbtiltakinfo.TiltakinfoService;
+import no.nav.fo.veilarbtiltakinfo.service.TiltakinfoService;
 import no.nav.fo.veilarbtiltakinfo.TiltakinfoRS;
 import no.nav.fo.veilarbtiltakinfo.bruker.TiltakDao;
 import no.nav.fo.veilarbtiltakinfo.oppfolging.OppfolgingClient;

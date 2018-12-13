@@ -22,7 +22,7 @@ public class BrukerDao {
         this.tiltakDao = tiltakDao;
     }
 
-    long opprett(Bruker bruker) {
+    public long opprett(Bruker bruker) {
         long brukerId = database.nesteFraSekvens("BRUKER_SEQ");
         database.update("INSERT INTO BRUKER (" +
                 "bruker_id, " +
@@ -48,7 +48,7 @@ public class BrukerDao {
         return brukerId;
     }
 
-    Bruker hent(long brukerId) {
+    public Bruker hent(long brukerId) {
         Bruker bruker = database.queryForObject("SELECT * FROM BRUKER WHERE bruker_id = ?",
             this::map,
             brukerId

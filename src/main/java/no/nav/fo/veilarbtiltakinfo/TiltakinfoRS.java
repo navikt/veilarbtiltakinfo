@@ -2,13 +2,16 @@ package no.nav.fo.veilarbtiltakinfo;
 
 import no.nav.apiapp.security.PepClient;
 import no.nav.common.auth.SubjectHandler;
+import no.nav.fo.veilarbtiltakinfo.dto.BrukerDto;
 import no.nav.fo.veilarbtiltakinfo.oppfolging.Oppfolgingsstatus;
+import no.nav.fo.veilarbtiltakinfo.service.TiltakinfoService;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
@@ -36,6 +39,14 @@ public class TiltakinfoRS {
         String fnr = getFnr();
         pepClient.sjekkLeseTilgangTilFnr(fnr);
         return tiltakinfoService.hentOppfolgingsstatus(fnr);
+    }
+
+    @POST
+    @Path("bruker")
+    public BrukerDto opprettBruker(BrukerDto brukerDto) {
+        String fnr = getFnr();
+        pepClient.sjekkSkriveTilgangTilFnr(fnr);
+        return tiltakinfoService.opprettBruker(brukerDto);
     }
 
     private String getFnr() {
