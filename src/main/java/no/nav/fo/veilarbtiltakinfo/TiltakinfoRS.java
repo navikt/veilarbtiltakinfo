@@ -25,7 +25,7 @@ public class TiltakinfoRS {
     private Provider<HttpServletRequest> requestProvider;
 
     @Inject
-    private TiltakinfoService tiltakService;
+    private TiltakinfoService tiltakinfoService;
 
     @Inject
     private PepClient pepClient;
@@ -35,7 +35,7 @@ public class TiltakinfoRS {
     public Oppfolgingsstatus hentOppfolgingsstatus() {
         String fnr = getFnr();
         pepClient.sjekkLeseTilgangTilFnr(fnr);
-        return tiltakService.hentOppfolgingsstatus(fnr);
+        return tiltakinfoService.hentOppfolgingsstatus(fnr);
     }
 
     private String getFnr() {
