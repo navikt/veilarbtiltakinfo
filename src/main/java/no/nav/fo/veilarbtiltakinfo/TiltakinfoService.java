@@ -1,7 +1,7 @@
 package no.nav.fo.veilarbtiltakinfo;
 
-import no.nav.fo.veilarbtiltakinfo.client.OppfolgingClient;
-import no.nav.fo.veilarbtiltakinfo.client.Oppfolgingsstatus;
+import no.nav.fo.veilarbtiltakinfo.oppfolging.OppfolgingClient;
+import no.nav.fo.veilarbtiltakinfo.oppfolging.Oppfolgingsstatus;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
