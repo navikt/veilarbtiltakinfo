@@ -1,4 +1,4 @@
-package no.nav.fo.veilarbtiltakinfo.bruker;
+package no.nav.fo.veilarbtiltakinfo.dao;
 
 import lombok.SneakyThrows;
 import no.nav.sbl.jdbc.Database;
@@ -43,7 +43,7 @@ public class BrukerDao {
 
         bruker.getTiltak().forEach(tiltak -> tiltakDao.opprett(brukerId, tiltak));
 
-        LOGGER.info("lagret bruker med id={}", brukerId);
+        LOGGER.info("lagret dao med id={}", brukerId);
 
         return brukerId;
     }

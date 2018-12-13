@@ -1,4 +1,4 @@
-package no.nav.fo.veilarbtiltakinfo.bruker;
+package no.nav.fo.veilarbtiltakinfo.dao;
 
 import lombok.SneakyThrows;
 import no.nav.sbl.jdbc.Database;

@@ -1,4 +1,4 @@
-package no.nav.fo.veilarbtiltakinfo.bruker;
+package no.nav.fo.veilarbtiltakinfo.dao;
 
 import no.nav.fo.veilarbtiltakinfo.DatabaseTest;
 import org.junit.BeforeClass;

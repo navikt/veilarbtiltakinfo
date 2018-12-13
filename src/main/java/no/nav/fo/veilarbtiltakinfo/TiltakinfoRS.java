@@ -42,7 +42,7 @@ public class TiltakinfoRS {
     }
 
     @POST
-    @Path("bruker")
+    @Path("dao")
     public BrukerDto opprettBruker(BrukerDto brukerDto) {
         String fnr = getFnr();
         pepClient.sjekkSkriveTilgangTilFnr(fnr);

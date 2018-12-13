@@ -1,7 +1,7 @@
 package no.nav.fo.veilarbtiltakinfo;
 
-import no.nav.fo.veilarbtiltakinfo.bruker.Bruker;
-import no.nav.fo.veilarbtiltakinfo.bruker.Tiltak;
+import no.nav.fo.veilarbtiltakinfo.dao.Bruker;
+import no.nav.fo.veilarbtiltakinfo.dao.Tiltak;
 import no.nav.fo.veilarbtiltakinfo.dto.BrukerDto;
 import no.nav.fo.veilarbtiltakinfo.dto.TiltakDto;
 

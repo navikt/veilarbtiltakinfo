@@ -1,7 +1,7 @@
 package no.nav.fo.veilarbtiltakinfo.service;
 
 import no.nav.fo.veilarbtiltakinfo.Mapper;
-import no.nav.fo.veilarbtiltakinfo.bruker.BrukerDao;
+import no.nav.fo.veilarbtiltakinfo.dao.BrukerDao;
 import no.nav.fo.veilarbtiltakinfo.dto.BrukerDto;
 import no.nav.fo.veilarbtiltakinfo.oppfolging.OppfolgingClient;
 import no.nav.fo.veilarbtiltakinfo.oppfolging.Oppfolgingsstatus;

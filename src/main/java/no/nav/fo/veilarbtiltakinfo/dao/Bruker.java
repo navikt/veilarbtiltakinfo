@@ -1,4 +1,4 @@
-package no.nav.fo.veilarbtiltakinfo.bruker;
+package no.nav.fo.veilarbtiltakinfo.dao;
 
 import lombok.Builder;
 import lombok.Value;

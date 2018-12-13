@@ -1,4 +1,4 @@
-package no.nav.fo.veilarbtiltakinfo.bruker;
+package no.nav.fo.veilarbtiltakinfo.dao;
 
 import no.nav.fo.veilarbtiltakinfo.DatabaseTest;
 import org.junit.BeforeClass;
@@ -8,7 +8,7 @@ import javax.inject.Inject;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static no.nav.fo.veilarbtiltakinfo.bruker.BrukerDaoTest.bruker;
+import static no.nav.fo.veilarbtiltakinfo.dao.BrukerDaoTest.bruker;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
