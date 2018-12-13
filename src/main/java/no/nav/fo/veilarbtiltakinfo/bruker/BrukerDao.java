@@ -48,7 +48,7 @@ public class BrukerDao {
         return brukerId;
     }
 
-    Bruker hentBruker(long brukerId) {
+    Bruker hent(long brukerId) {
         Bruker bruker = database.queryForObject("SELECT * FROM BRUKER WHERE bruker_id = ?",
             this::map,
             brukerId

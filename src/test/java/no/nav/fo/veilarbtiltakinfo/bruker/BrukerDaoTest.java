@@ -29,7 +29,7 @@ public class BrukerDaoTest extends DatabaseTest {
         Bruker bruker = bruker();
         long brukerId = brukerDao.opprett(bruker);
 
-        Bruker brukerFraDb = brukerDao.hentBruker(brukerId);
+        Bruker brukerFraDb = brukerDao.hent(brukerId);
 
         assertThat(brukerFraDb.getFnr(), equalTo(bruker.getFnr()));
         assertThat(brukerFraDb.getMaal(), equalTo(bruker.getMaal()));
@@ -41,7 +41,7 @@ public class BrukerDaoTest extends DatabaseTest {
         Bruker bruker = bruker().toBuilder().maal(null).build();
         long brukerId = brukerDao.opprett(bruker);
 
-        Bruker brukerFraDb = brukerDao.hentBruker(brukerId);
+        Bruker brukerFraDb = brukerDao.hent(brukerId);
 
         assertThat(brukerFraDb.getMaal(), isEmptyOrNullString());
     }
@@ -51,7 +51,7 @@ public class BrukerDaoTest extends DatabaseTest {
         Bruker bruker = bruker();
         long brukerId = brukerDao.opprett(bruker);
 
-        Bruker brukerFraDb = brukerDao.hentBruker(brukerId);
+        Bruker brukerFraDb = brukerDao.hent(brukerId);
 
         List<String> tiltakNokler = bruker.getTiltak().stream().map(Tiltak::getNokkel).collect(Collectors.toList());
         List<String> tiltakNoklerFraDb = brukerFraDb.getTiltak().stream().map(Tiltak::getNokkel).collect(Collectors.toList());
