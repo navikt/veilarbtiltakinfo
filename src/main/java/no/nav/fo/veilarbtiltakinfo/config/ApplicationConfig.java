@@ -2,7 +2,7 @@ package no.nav.fo.veilarbtiltakinfo.config;
 
 import no.nav.apiapp.ApiApplication.NaisApiApplication;
 import no.nav.apiapp.config.ApiAppConfigurator;
-import no.nav.fo.veilarbtiltakinfo.TiltakService;
+import no.nav.fo.veilarbtiltakinfo.TiltakinfoService;
 import no.nav.fo.veilarbtiltakinfo.TiltakinfoRS;
 import no.nav.fo.veilarbtiltakinfo.bruker.TiltakDao;
 import no.nav.fo.veilarbtiltakinfo.client.OppfolgingClient;
@@ -21,7 +21,7 @@ import javax.sql.DataSource;
     PepConfig.class,
     OppfolgingClient.class,
     OppfolgingClientHelseSjekk.class,
-    TiltakService.class,
+    TiltakinfoService.class,
     TiltakinfoRS.class,
     DataSourceConfig.class,
     DataSourceHelsesjekk.class,

@@ -25,7 +25,7 @@ public class TiltakinfoRS {
     private Provider<HttpServletRequest> requestProvider;
 
     @Inject
-    private TiltakService tiltakService;
+    private TiltakinfoService tiltakService;
 
     @Inject
     private PepClient pepClient;
