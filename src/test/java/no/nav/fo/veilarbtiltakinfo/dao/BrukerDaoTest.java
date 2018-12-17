@@ -6,13 +6,10 @@ import org.junit.Test;
 
 import javax.inject.Inject;
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.HashSet;
+import java.util.Set;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsInAnyOrder;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.isEmptyOrNullString;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class BrukerDaoTest extends DatabaseTest {
 
@@ -31,9 +28,9 @@ public class BrukerDaoTest extends DatabaseTest {
 
         Bruker brukerFraDb = brukerDao.hent(brukerId);
 
-        assertThat(brukerFraDb.getFnr(), equalTo(bruker.getFnr()));
-        assertThat(brukerFraDb.getMaal(), equalTo(bruker.getMaal()));
-        assertThat(brukerFraDb.getUnderOppfolging(), equalTo(bruker.getUnderOppfolging()));
+        assertThat(brukerFraDb.getFnr()).isEqualTo(bruker.getFnr());
+        assertThat(brukerFraDb.getMaal()).isEqualTo(bruker.getMaal());
+        assertThat(brukerFraDb.getUnderOppfolging()).isEqualTo(bruker.getUnderOppfolging());
     }
 
     @Test
@@ -43,7 +40,7 @@ public class BrukerDaoTest extends DatabaseTest {
 
         Bruker brukerFraDb = brukerDao.hent(brukerId);
 
-        assertThat(brukerFraDb.getMaal(), isEmptyOrNullString());
+        assertThat(brukerFraDb.getMaal()).isNull();
     }
 
     @Test
@@ -53,10 +50,10 @@ public class BrukerDaoTest extends DatabaseTest {
 
         Bruker brukerFraDb = brukerDao.hent(brukerId);
 
-        List<String> tiltakNokler = bruker.getTiltak().stream().map(Tiltak::getNokkel).collect(Collectors.toList());
-        List<String> tiltakNoklerFraDb = brukerFraDb.getTiltak().stream().map(Tiltak::getNokkel).collect(Collectors.toList());
+        Set<Tiltak> tiltak = new HashSet<>(bruker.getTiltak());
+        Set<Tiltak> tiltakFraDb = new HashSet<>(brukerFraDb.getTiltak());
 
-        assertThat(tiltakNoklerFraDb, containsInAnyOrder(tiltakNokler.toArray()));
+        assertThat(tiltakFraDb).isEqualTo(tiltak);
 
     }
 

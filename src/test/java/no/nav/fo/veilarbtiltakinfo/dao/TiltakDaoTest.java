@@ -5,12 +5,12 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import javax.inject.Inject;
+import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Set;
 
 import static no.nav.fo.veilarbtiltakinfo.dao.BrukerDaoTest.bruker;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class TiltakDaoTest extends DatabaseTest {
 
@@ -33,20 +33,20 @@ public class TiltakDaoTest extends DatabaseTest {
 
         List<Tiltak> tiltakFraDb = tiltakDao.hentTiltak(tiltakId);
 
-        assertThat(tiltakFraDb, hasSize(1));
-        assertThat(tiltakFraDb.get(0).getNokkel(), equalTo(tiltak.getNokkel()));
+        assertThat(tiltakFraDb).hasSize(1);
+        assertThat(tiltakFraDb.get(0)).isEqualTo(tiltak);
     }
 
     @Test
     public void skalOppretteOgHenteTiltakForBruker() {
         Bruker bruker = bruker();
-        List<String> tiltak = bruker.getTiltak().stream().map(Tiltak::getNokkel).collect(Collectors.toList());
+        Set<Tiltak> tiltak = new HashSet<>(bruker.getTiltak());
         long brukerId = brukerDao.opprett(bruker);
 
-        List<String> tiltakNoklerFraDb = tiltakDao.hentTiltakForBruker(brukerId).stream().map(Tiltak::getNokkel).collect(Collectors.toList());
+        Set<Tiltak> tiltakFraDb = new HashSet<>(tiltakDao.hentTiltakForBruker(brukerId));
 
-        assertThat(tiltakNoklerFraDb, hasSize(2));
-        assertThat(tiltakNoklerFraDb, containsInAnyOrder(tiltak.toArray()));
+        assertThat(tiltakFraDb).hasSize(2);
+        assertThat(tiltakFraDb).isEqualTo(tiltak);
     }
 
     private Tiltak tiltak(String nokkel) {
