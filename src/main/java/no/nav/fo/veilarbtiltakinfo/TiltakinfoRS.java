@@ -49,7 +49,7 @@ public class TiltakinfoRS {
         validate(brukerDto);
         String fnr = getFnr();
         pepClient.sjekkSkriveTilgangTilFnr(fnr);
-        return tiltakinfoService.opprettBruker(brukerDto);
+        return tiltakinfoService.opprettBruker(brukerDto.toBuilder().fnr(fnr).build());
     }
 
     private String getFnr() {
