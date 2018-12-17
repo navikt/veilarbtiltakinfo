@@ -61,7 +61,6 @@ public class BrukerDaoTest extends DatabaseTest {
         return Bruker.builder()
             .fnr("11111111111")
             .oppfolgingsEnhetId("0219")
-            .oppfolgingsEnhetNavn("NAV Bærum")
             .underOppfolging(true)
             .maal("Samme jobb")
             .tiltak(Arrays.asList(

@@ -29,14 +29,12 @@ public class BrukerDao {
                 "bruker_tidspunkt, " +
                 "fnr, " +
                 "oppfolgingsenhet_id, " +
-                "oppfolgingsenhet_navn, " +
                 "under_oppfolging, " +
                 "maal) " +
-                "VALUES (?, CURRENT_TIMESTAMP, ?, ?, ?, ?, ?)",
+                "VALUES (?, CURRENT_TIMESTAMP, ?, ?, ?, ?)",
             brukerId,
             bruker.getFnr(),
             bruker.getOppfolgingsEnhetId(),
-            bruker.getOppfolgingsEnhetNavn(),
             bruker.getUnderOppfolging(),
             bruker.getMaal()
         );
@@ -65,10 +63,8 @@ public class BrukerDao {
             .brukerTidspunkt(resultSet.getTimestamp("bruker_tidspunkt"))
             .fnr(resultSet.getString("fnr"))
             .oppfolgingsEnhetId(resultSet.getString("oppfolgingsenhet_id"))
-            .oppfolgingsEnhetNavn(resultSet.getString("oppfolgingsenhet_navn"))
             .underOppfolging(resultSet.getBoolean("under_oppfolging"))
             .maal(resultSet.getString("maal"))
             .build();
     }
-
 }

@@ -1,0 +1,1 @@
+ALTER TABLE BRUKER DROP COLUMN oppfolgingsenhet_navn;

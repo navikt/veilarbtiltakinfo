@@ -43,7 +43,6 @@ public class TiltakinfoServiceTest {
 
         assertThat(brukerDtoFraDb.getFnr()).isEqualTo(this.testBrukerDto.getFnr());
         assertThat(brukerDtoFraDb.getOppfolgingsEnhetId()).isEqualTo(this.testBrukerDto.getOppfolgingsEnhetId());
-        assertThat(brukerDtoFraDb.getOppfolgingsEnhetNavn()).isEqualTo(this.testBrukerDto.getOppfolgingsEnhetNavn());
         assertThat(brukerDtoFraDb.getUnderOppfolging()).isEqualTo(this.testBrukerDto.getUnderOppfolging());
         assertThat(brukerDtoFraDb.getMaal()).isEqualTo(this.testBrukerDto.getMaal());
         assertThat(brukerDtoFraDb.getTiltak()).isEqualTo(this.testBrukerDto.getTiltak());
@@ -53,7 +52,6 @@ public class TiltakinfoServiceTest {
         return BrukerDto.builder()
             .fnr("11111111111")
             .oppfolgingsEnhetId("0219")
-            .oppfolgingsEnhetNavn("NAV Bærum")
             .underOppfolging(true)
             .maal("Samme jobb")
             .tiltak(Arrays.asList(

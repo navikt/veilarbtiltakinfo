@@ -14,7 +14,6 @@ public class Bruker {
 
     private String fnr;
     private String oppfolgingsEnhetId;
-    private String oppfolgingsEnhetNavn;
     private Boolean underOppfolging;
     private String maal;
     private List<Tiltak> tiltak;
