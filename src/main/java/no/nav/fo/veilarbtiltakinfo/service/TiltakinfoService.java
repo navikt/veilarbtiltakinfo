@@ -29,11 +29,11 @@ public class TiltakinfoService {
     }
 
     public BrukerDto opprettBruker(BrukerDto brukerDto) {
-        long brukerId = of(brukerDto)
+        return of(brukerDto)
             .map(Mapper::map)
             .map(bruker -> brukerDao.opprett(bruker))
+            .map(brukerId -> brukerDao.hent(brukerId))
+            .map(Mapper::map)
             .get();
-
-        return of(brukerDao.hent(brukerId)).map(Mapper::map).get();
     }
 }
