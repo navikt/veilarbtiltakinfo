@@ -43,7 +43,7 @@ public class BrukerDao {
 
         bruker.getTiltak().forEach(tiltak -> tiltakDao.opprett(brukerId, tiltak));
 
-        LOGGER.info("lagret dao med id={}", brukerId);
+        LOGGER.info("lagret bruker med id={}", brukerId);
 
         return brukerId;
     }
