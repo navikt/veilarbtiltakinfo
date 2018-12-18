@@ -46,7 +46,6 @@ public class TiltakinfoRS {
     @POST
     @Path("bruker")
     public BrukerDto opprettBruker(BrukerDto brukerDto) {
-        validate(brukerDto);
         String fnr = getFnr();
         pepClient.sjekkSkriveTilgangTilFnr(fnr);
         return tiltakinfoService.opprettBruker(brukerDto.toBuilder().fnr(fnr).build());
