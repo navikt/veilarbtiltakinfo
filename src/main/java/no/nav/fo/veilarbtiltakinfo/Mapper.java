@@ -22,6 +22,7 @@ public class Mapper {
                 .maal(dto.getMaal())
                 .tiltak(dto.getTiltak().stream().map(Mapper::map).collect(toList()))
                 .build())
+            .map(ValidationUtils::validate)
             .orElseThrow(() -> new WebApplicationException(FeilType.UGYLDIG_HANDLING.getStatus()));
     }
 
@@ -30,13 +31,16 @@ public class Mapper {
     }
 
     public static BrukerDto map(Bruker bruker) {
-        return BrukerDto.builder()
-            .fnr(bruker.getFnr())
-            .oppfolgingsEnhetId(bruker.getOppfolgingsEnhetId())
-            .underOppfolging(bruker.getUnderOppfolging())
-            .maal(bruker.getMaal())
-            .tiltak(bruker.getTiltak().stream().map(Mapper::map).collect(toList()))
-            .build();
+        return Optional.of(bruker)
+            .map(b -> BrukerDto.builder()
+                .fnr(bruker.getFnr())
+                .oppfolgingsEnhetId(bruker.getOppfolgingsEnhetId())
+                .underOppfolging(bruker.getUnderOppfolging())
+                .maal(bruker.getMaal())
+                .tiltak(bruker.getTiltak().stream().map(Mapper::map).collect(toList()))
+                .build())
+            .map(ValidationUtils::validate)
+            .orElseThrow(() -> new WebApplicationException(FeilType.UGYLDIG_HANDLING.getStatus()));
     }
 
     private static TiltakDto map(Tiltak tiltak) {

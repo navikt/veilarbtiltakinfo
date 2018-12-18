@@ -1,12 +1,17 @@
 package no.nav.fo.veilarbtiltakinfo.dao;
 
 import lombok.SneakyThrows;
+import no.nav.apiapp.feil.FeilType;
 import no.nav.sbl.jdbc.Database;
+import no.nav.validation.ValidationUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
+import javax.ws.rs.WebApplicationException;
 import java.sql.ResultSet;
+
+import static java.util.Optional.of;
 
 public class BrukerDao {
 
@@ -47,13 +52,11 @@ public class BrukerDao {
     }
 
     public Bruker hent(long brukerId) {
-        Bruker bruker = database.queryForObject("SELECT * FROM BRUKER WHERE bruker_id = ?",
-            this::map,
-            brukerId
-        );
-        return bruker.toBuilder()
-            .tiltak(tiltakDao.hentTiltakForBruker(brukerId))
-            .build();
+        return of(brukerId)
+            .map(id -> database.queryForObject("SELECT * FROM BRUKER WHERE bruker_id = ?", this::map, id))
+            .map(bruker -> bruker.toBuilder().tiltak(tiltakDao.hentTiltakForBruker(bruker.getBrukerId())).build())
+            .map(ValidationUtils::validate)
+            .orElseThrow(() -> new WebApplicationException(FeilType.UGYLDIG_HANDLING.getStatus()));
     }
 
     @SneakyThrows

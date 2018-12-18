@@ -16,17 +16,14 @@ public class BrukerDto {
     private String fnr;
     @NotEmpty
     private String oppfolgingsEnhetId;
-    @NotEmpty
-    private String oppfolgingsEnhetNavn;
-    @NotEmpty
+    @NotNull
     private Boolean underOppfolging;
-    @NotEmpty
     private String maal;
     @NotEmpty
     private List<TiltakDto> tiltak;
 
     @AssertTrue
-    public boolean isHarToTiltak(){
+    public boolean isHarToTiltak() {
         return tiltak != null && tiltak.size() == 2;
     }
 }
