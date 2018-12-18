@@ -1,12 +1,17 @@
-package no.nav.fo.veilarbtiltakinfo.bruker;
+package no.nav.fo.veilarbtiltakinfo.dao;
 
 import lombok.SneakyThrows;
+import no.nav.apiapp.feil.FeilType;
 import no.nav.sbl.jdbc.Database;
+import no.nav.validation.ValidationUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
+import javax.ws.rs.WebApplicationException;
 import java.sql.ResultSet;
+
+import static java.util.Optional.of;
 
 public class BrukerDao {
 
@@ -22,21 +27,19 @@ public class BrukerDao {
         this.tiltakDao = tiltakDao;
     }
 
-    long opprett(Bruker bruker) {
+    public long opprett(Bruker bruker) {
         long brukerId = database.nesteFraSekvens("BRUKER_SEQ");
         database.update("INSERT INTO BRUKER (" +
                 "bruker_id, " +
                 "bruker_tidspunkt, " +
                 "fnr, " +
                 "oppfolgingsenhet_id, " +
-                "oppfolgingsenhet_navn, " +
                 "under_oppfolging, " +
                 "maal) " +
-                "VALUES (?, CURRENT_TIMESTAMP, ?, ?, ?, ?, ?)",
+                "VALUES (?, CURRENT_TIMESTAMP, ?, ?, ?, ?)",
             brukerId,
             bruker.getFnr(),
             bruker.getOppfolgingsEnhetId(),
-            bruker.getOppfolgingsEnhetNavn(),
             bruker.getUnderOppfolging(),
             bruker.getMaal()
         );
@@ -48,14 +51,12 @@ public class BrukerDao {
         return brukerId;
     }
 
-    Bruker hentBruker(long brukerId) {
-        Bruker bruker = database.queryForObject("SELECT * FROM BRUKER WHERE bruker_id = ?",
-            this::map,
-            brukerId
-        );
-        return bruker.toBuilder()
-            .tiltak(tiltakDao.hentTiltakForBruker(brukerId))
-            .build();
+    public Bruker hent(long brukerId) {
+        return of(brukerId)
+            .map(id -> database.queryForObject("SELECT * FROM BRUKER WHERE bruker_id = ?", this::map, id))
+            .map(bruker -> bruker.toBuilder().tiltak(tiltakDao.hentTiltakForBruker(bruker.getBrukerId())).build())
+            .map(ValidationUtils::validate)
+            .orElseThrow(() -> new WebApplicationException(FeilType.UGYLDIG_HANDLING.getStatus()));
     }
 
     @SneakyThrows
@@ -65,10 +66,8 @@ public class BrukerDao {
             .brukerTidspunkt(resultSet.getTimestamp("bruker_tidspunkt"))
             .fnr(resultSet.getString("fnr"))
             .oppfolgingsEnhetId(resultSet.getString("oppfolgingsenhet_id"))
-            .oppfolgingsEnhetNavn(resultSet.getString("oppfolgingsenhet_navn"))
             .underOppfolging(resultSet.getBoolean("under_oppfolging"))
             .maal(resultSet.getString("maal"))
             .build();
     }
-
 }

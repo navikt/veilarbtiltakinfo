@@ -1,4 +1,4 @@
-package no.nav.fo.veilarbtiltakinfo.client;
+package no.nav.fo.veilarbtiltakinfo.oppfolging;
 
 import no.nav.common.auth.SubjectHandler;
 import no.nav.sbl.rest.RestUtils;

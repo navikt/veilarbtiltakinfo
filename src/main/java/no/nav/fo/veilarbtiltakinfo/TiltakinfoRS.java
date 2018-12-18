@@ -2,17 +2,22 @@ package no.nav.fo.veilarbtiltakinfo;
 
 import no.nav.apiapp.security.PepClient;
 import no.nav.common.auth.SubjectHandler;
-import no.nav.fo.veilarbtiltakinfo.client.Oppfolgingsstatus;
+import no.nav.fo.veilarbtiltakinfo.dto.BrukerDto;
+import no.nav.fo.veilarbtiltakinfo.oppfolging.Oppfolgingsstatus;
+import no.nav.fo.veilarbtiltakinfo.service.TiltakinfoService;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.ValidationUtils;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
 import static java.util.Optional.ofNullable;
+import static no.nav.validation.ValidationUtils.validate;
 
 @Component
 @Path("/")
@@ -25,7 +30,7 @@ public class TiltakinfoRS {
     private Provider<HttpServletRequest> requestProvider;
 
     @Inject
-    private TiltakService tiltakService;
+    private TiltakinfoService tiltakinfoService;
 
     @Inject
     private PepClient pepClient;
@@ -35,7 +40,16 @@ public class TiltakinfoRS {
     public Oppfolgingsstatus hentOppfolgingsstatus() {
         String fnr = getFnr();
         pepClient.sjekkLeseTilgangTilFnr(fnr);
-        return tiltakService.hentOppfolgingsstatus(fnr);
+        return tiltakinfoService.hentOppfolgingsstatus(fnr);
+    }
+
+    @POST
+    @Path("bruker")
+    public BrukerDto opprettBruker(BrukerDto brukerDto) {
+        validate(brukerDto);
+        String fnr = getFnr();
+        pepClient.sjekkSkriveTilgangTilFnr(fnr);
+        return tiltakinfoService.opprettBruker(brukerDto.toBuilder().fnr(fnr).build());
     }
 
     private String getFnr() {

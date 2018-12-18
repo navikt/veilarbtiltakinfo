@@ -1,4 +1,4 @@
-package no.nav.fo.veilarbtiltakinfo.client;
+package no.nav.fo.veilarbtiltakinfo.oppfolging;
 
 import lombok.Data;
 import lombok.experimental.Accessors;

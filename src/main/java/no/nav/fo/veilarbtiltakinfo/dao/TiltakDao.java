@@ -1,13 +1,17 @@
-package no.nav.fo.veilarbtiltakinfo.bruker;
+package no.nav.fo.veilarbtiltakinfo.dao;
 
 import lombok.SneakyThrows;
+import no.nav.apiapp.feil.FeilType;
 import no.nav.sbl.jdbc.Database;
+import no.nav.validation.ValidationUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
+import javax.ws.rs.WebApplicationException;
 import java.sql.ResultSet;
 import java.util.List;
+import java.util.Optional;
 
 public class TiltakDao {
 
@@ -46,10 +50,10 @@ public class TiltakDao {
     }
 
     private List<Tiltak> hent(String felt, long id) {
-        return database.query("SELECT * FROM TILTAK WHERE " + felt + " = ?",
-            this::map,
-            id
-        );
+        return Optional.of(id)
+            .map(idArg -> database.query("SELECT * FROM TILTAK WHERE " + felt + " = ?", this::map, idArg))
+            .map(ValidationUtils::validate)
+            .orElseThrow(() -> new WebApplicationException(FeilType.UGYLDIG_HANDLING.getStatus()));
     }
 
     @SneakyThrows

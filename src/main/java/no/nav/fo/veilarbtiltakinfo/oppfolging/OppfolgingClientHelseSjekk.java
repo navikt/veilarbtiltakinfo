@@ -1,11 +1,11 @@
-package no.nav.fo.veilarbtiltakinfo.client;
+package no.nav.fo.veilarbtiltakinfo.oppfolging;
 
 import no.nav.apiapp.selftest.Helsesjekk;
 import no.nav.apiapp.selftest.HelsesjekkMetadata;
 import no.nav.brukerdialog.security.oidc.SystemUserTokenProvider;
 
 import static javax.ws.rs.core.HttpHeaders.AUTHORIZATION;
-import static no.nav.fo.veilarbtiltakinfo.client.OppfolgingClient.VEILARBOPPFOLGINGAPI_URL_PROPERTY_NAME;
+import static no.nav.fo.veilarbtiltakinfo.oppfolging.OppfolgingClient.VEILARBOPPFOLGINGAPI_URL_PROPERTY_NAME;
 import static no.nav.sbl.rest.RestUtils.withClient;
 import static no.nav.sbl.util.EnvironmentUtils.getRequiredProperty;
 

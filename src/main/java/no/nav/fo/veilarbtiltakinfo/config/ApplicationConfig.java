@@ -2,12 +2,12 @@ package no.nav.fo.veilarbtiltakinfo.config;
 
 import no.nav.apiapp.ApiApplication.NaisApiApplication;
 import no.nav.apiapp.config.ApiAppConfigurator;
-import no.nav.fo.veilarbtiltakinfo.TiltakService;
+import no.nav.fo.veilarbtiltakinfo.service.TiltakinfoService;
 import no.nav.fo.veilarbtiltakinfo.TiltakinfoRS;
-import no.nav.fo.veilarbtiltakinfo.bruker.TiltakDao;
-import no.nav.fo.veilarbtiltakinfo.client.OppfolgingClient;
-import no.nav.fo.veilarbtiltakinfo.client.OppfolgingClientHelseSjekk;
-import no.nav.fo.veilarbtiltakinfo.bruker.BrukerDao;
+import no.nav.fo.veilarbtiltakinfo.dao.TiltakDao;
+import no.nav.fo.veilarbtiltakinfo.oppfolging.OppfolgingClient;
+import no.nav.fo.veilarbtiltakinfo.oppfolging.OppfolgingClientHelseSjekk;
+import no.nav.fo.veilarbtiltakinfo.dao.BrukerDao;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +21,7 @@ import javax.sql.DataSource;
     PepConfig.class,
     OppfolgingClient.class,
     OppfolgingClientHelseSjekk.class,
-    TiltakService.class,
+    TiltakinfoService.class,
     TiltakinfoRS.class,
     DataSourceConfig.class,
     DataSourceHelsesjekk.class,
