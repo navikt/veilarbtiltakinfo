@@ -8,13 +8,13 @@ import no.nav.fo.veilarbtiltakinfo.dto.TiltakDto;
 import no.nav.validation.ValidationUtils;
 
 import javax.ws.rs.WebApplicationException;
-import java.util.Optional;
 
+import static java.util.Optional.of;
 import static java.util.stream.Collectors.toList;
 
 public class Mapper {
     public static Bruker map(BrukerDto brukerDto) {
-        return Optional.of(brukerDto)
+        return of(brukerDto)
             .map(dto -> Bruker.builder()
                 .fnr(dto.getFnr())
                 .oppfolgingsEnhetId(dto.getOppfolgingsEnhetId())
@@ -27,11 +27,14 @@ public class Mapper {
     }
 
     private static Tiltak map(TiltakDto tiltakDto) {
-        return Tiltak.builder().nokkel(tiltakDto.getNokkel()).build();
+        return of(tiltakDto)
+            .map(dto -> Tiltak.builder().nokkel(tiltakDto.getNokkel()).build())
+            .map(ValidationUtils::validate)
+            .orElseThrow(() -> new WebApplicationException(FeilType.UGYLDIG_HANDLING.getStatus()));
     }
 
     public static BrukerDto map(Bruker bruker) {
-        return Optional.of(bruker)
+        return of(bruker)
             .map(b -> BrukerDto.builder()
                 .fnr(bruker.getFnr())
                 .oppfolgingsEnhetId(bruker.getOppfolgingsEnhetId())
@@ -44,8 +47,9 @@ public class Mapper {
     }
 
     private static TiltakDto map(Tiltak tiltak) {
-        return TiltakDto.builder()
-            .nokkel(tiltak.getNokkel())
-            .build();
+        return of(tiltak)
+            .map(t -> TiltakDto.builder().nokkel(t.getNokkel()).build())
+            .map(ValidationUtils::validate)
+            .orElseThrow(() -> new WebApplicationException(FeilType.UGYLDIG_HANDLING.getStatus()));
     }
 }
