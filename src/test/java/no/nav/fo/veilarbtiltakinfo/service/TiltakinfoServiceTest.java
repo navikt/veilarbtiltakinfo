@@ -77,7 +77,7 @@ public class TiltakinfoServiceTest {
         tiltakinfoService.opprettBruker(brukerDto);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void skalKasteExceptionHvisOppretterBrukerOgTiltakErNull() {
         BrukerDto brukerDto = brukerDto().toBuilder().tiltak(null).build();
         setup(brukerDto);

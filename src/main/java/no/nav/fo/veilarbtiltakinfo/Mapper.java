@@ -8,19 +8,22 @@ import no.nav.fo.veilarbtiltakinfo.dto.TiltakDto;
 import no.nav.validation.ValidationUtils;
 
 import javax.ws.rs.WebApplicationException;
+import java.util.List;
 
 import static java.util.Optional.of;
+import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.toList;
 
 public class Mapper {
     public static Bruker map(BrukerDto brukerDto) {
+        List<TiltakDto> tiltakDtos = ofNullable(brukerDto.getTiltak()).orElseThrow(IllegalArgumentException::new);
         return of(brukerDto)
             .map(dto -> Bruker.builder()
                 .fnr(dto.getFnr())
                 .oppfolgingsEnhetId(dto.getOppfolgingsEnhetId())
                 .underOppfolging(dto.getUnderOppfolging())
                 .maal(dto.getMaal())
-                .tiltak(dto.getTiltak().stream().map(Mapper::map).collect(toList()))
+                .tiltak(tiltakDtos.stream().map(Mapper::map).collect(toList()))
                 .build())
             .map(ValidationUtils::validate)
             .orElseThrow(() -> new WebApplicationException(FeilType.UGYLDIG_HANDLING.getStatus()));
