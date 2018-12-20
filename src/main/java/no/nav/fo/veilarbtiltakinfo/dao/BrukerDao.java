@@ -69,4 +69,11 @@ public class BrukerDao {
             .maal(resultSet.getString("maal"))
             .build();
     }
+
+    public Bruker hent(String fnr) {
+        return of(fnr)
+            .map(f -> database.queryForObject("SELECT * FROM BRUKER WHERE fnr = ?", this::map, f))
+            .map(bruker -> bruker.toBuilder().tiltak(tiltakDao.hentTiltakForBruker(bruker.getBrukerId())).build())
+            .orElseThrow(() -> new WebApplicationException(FeilType.FINNES_IKKE.getStatus()));
+    }
 }

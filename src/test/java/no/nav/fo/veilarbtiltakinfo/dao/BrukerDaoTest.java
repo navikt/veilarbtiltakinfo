@@ -3,6 +3,8 @@ package no.nav.fo.veilarbtiltakinfo.dao;
 import no.nav.fo.veilarbtiltakinfo.DatabaseTest;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 
 import javax.inject.Inject;
 import java.util.Arrays;
@@ -68,5 +70,27 @@ public class BrukerDaoTest extends DatabaseTest {
                 Tiltak.builder().nokkel("tiltak-arbeidsrettet-rehabilitering").build()
             ))
             .build();
+    }
+
+    @Test
+    public void skalReturnereBrukerHvisFinnesIDatabase() {
+        brukerDao.opprett(bruker());
+        Bruker bruker = brukerDao.hent(bruker().getFnr());
+
+        assertThat(bruker).isNotNull();
+    }
+
+    @Test(expected = EmptyResultDataAccessException.class)
+    public void skalKasteExceptionHvisBrukerIkkeFinnesIDatabase() {
+        brukerDao.hent(bruker().getFnr());
+    }
+
+    @Test(expected = IncorrectResultSizeDataAccessException.class)
+    public void skalKasteExceptionHvisDetFinnesFlereEnnEttInnslagAvBrukerIDatabase() {
+        Bruker bruker = bruker();
+        brukerDao.opprett(bruker);
+        brukerDao.opprett(bruker.toBuilder().underOppfolging(false).build());
+
+        brukerDao.hent(bruker.getFnr());
     }
 }
