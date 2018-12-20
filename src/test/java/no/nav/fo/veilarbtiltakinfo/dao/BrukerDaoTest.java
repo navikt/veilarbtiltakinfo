@@ -33,6 +33,10 @@ public class BrukerDaoTest extends DatabaseTest {
         assertThat(brukerFraDb.getFnr()).isEqualTo(bruker.getFnr());
         assertThat(brukerFraDb.getMaal()).isEqualTo(bruker.getMaal());
         assertThat(brukerFraDb.getUnderOppfolging()).isEqualTo(bruker.getUnderOppfolging());
+        assertThat(brukerFraDb.getOppfolgingsEnhetId()).isEqualTo(bruker.getOppfolgingsEnhetId());
+        assertThat(brukerFraDb.getErSykmeldt()).isEqualTo(bruker.getErSykmeldt());
+        assertThat(brukerFraDb.getHarArbeidsgiver()).isEqualTo(bruker.getHarArbeidsgiver());
+        assertThat(brukerFraDb.getServiceGruppeKode()).isEqualTo(bruker.getServiceGruppeKode());
     }
 
     @Test
@@ -62,6 +66,9 @@ public class BrukerDaoTest extends DatabaseTest {
     static Bruker bruker() {
         return Bruker.builder()
             .fnr("11111111111")
+            .erSykmeldt(true)
+            .harArbeidsgiver(true)
+            .serviceGruppeKode("BATT")
             .oppfolgingsEnhetId("0219")
             .underOppfolging(true)
             .maal("Samme jobb")

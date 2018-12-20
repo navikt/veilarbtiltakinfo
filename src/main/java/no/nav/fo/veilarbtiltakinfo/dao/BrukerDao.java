@@ -33,12 +33,18 @@ public class BrukerDao {
                 "bruker_id, " +
                 "bruker_tidspunkt, " +
                 "fnr, " +
+                "er_sykmeldt, " +
+                "har_arbeidsgiver, " +
+                "servicegruppekode, " +
                 "oppfolgingsenhet_id, " +
                 "under_oppfolging, " +
                 "maal) " +
-                "VALUES (?, CURRENT_TIMESTAMP, ?, ?, ?, ?)",
+                "VALUES (?, CURRENT_TIMESTAMP, ?, ?, ?, ?, ?, ?, ?)",
             brukerId,
             bruker.getFnr(),
+            bruker.getErSykmeldt(),
+            bruker.getHarArbeidsgiver(),
+            bruker.getServiceGruppeKode(),
             bruker.getOppfolgingsEnhetId(),
             bruker.getUnderOppfolging(),
             bruker.getMaal()
@@ -64,6 +70,9 @@ public class BrukerDao {
             .brukerId(resultSet.getLong("bruker_id"))
             .brukerTidspunkt(resultSet.getTimestamp("bruker_tidspunkt"))
             .fnr(resultSet.getString("fnr"))
+            .erSykmeldt(resultSet.getBoolean("er_sykmeldt"))
+            .harArbeidsgiver(resultSet.getBoolean("har_arbeidsgiver"))
+            .serviceGruppeKode(resultSet.getString("servicegruppekode"))
             .oppfolgingsEnhetId(resultSet.getString("oppfolgingsenhet_id"))
             .underOppfolging(resultSet.getBoolean("under_oppfolging"))
             .maal(resultSet.getString("maal"))
