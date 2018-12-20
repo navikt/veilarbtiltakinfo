@@ -3,7 +3,6 @@ package no.nav.fo.veilarbtiltakinfo.dao;
 import lombok.SneakyThrows;
 import no.nav.apiapp.feil.FeilType;
 import no.nav.sbl.jdbc.Database;
-import no.nav.validation.ValidationUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
