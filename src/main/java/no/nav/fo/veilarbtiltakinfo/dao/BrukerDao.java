@@ -55,7 +55,6 @@ public class BrukerDao {
         return of(brukerId)
             .map(id -> database.queryForObject("SELECT * FROM BRUKER WHERE bruker_id = ?", this::map, id))
             .map(bruker -> bruker.toBuilder().tiltak(tiltakDao.hentTiltakForBruker(bruker.getBrukerId())).build())
-            .map(ValidationUtils::validate)
             .orElseThrow(() -> new WebApplicationException(FeilType.UGYLDIG_HANDLING.getStatus()));
     }
 
