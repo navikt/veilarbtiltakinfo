@@ -1,16 +1,19 @@
 package no.nav.fo.veilarbtiltakinfo.service;
 
-import no.nav.fo.veilarbtiltakinfo.Mapper;
 import no.nav.fo.veilarbtiltakinfo.dao.Bruker;
 import no.nav.fo.veilarbtiltakinfo.dao.BrukerDao;
+import no.nav.fo.veilarbtiltakinfo.dao.Tiltak;
 import no.nav.fo.veilarbtiltakinfo.dto.BrukerDto;
 import no.nav.fo.veilarbtiltakinfo.dto.TiltakDto;
 import no.nav.fo.veilarbtiltakinfo.oppfolging.OppfolgingClient;
-import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.stream.Stream;
 
+import static java.util.Collections.singletonList;
+import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -21,14 +24,15 @@ public class TiltakinfoServiceTest {
     private BrukerDto testBrukerDto;
     private Bruker testBruker;
     private long testBrukerId;
+    private OppfolgingClient oppfolgingClient;
+    private BrukerDao brukerDao;
 
-    @Before
-    public void setup() {
-        OppfolgingClient oppfolgingClient = mock(OppfolgingClient.class);
-        BrukerDao brukerDao = mock(BrukerDao.class);
+    private void setup(BrukerDto dto) {
+        this.oppfolgingClient = mock(OppfolgingClient.class);
+        this.brukerDao = mock(BrukerDao.class);
 
-        this.testBrukerDto = brukerDto();
-        this.testBruker = Mapper.map(this.testBrukerDto);
+        this.testBrukerDto = dto;
+        this.testBruker = bruker();
         this.testBrukerId = 1L;
 
         when(brukerDao.opprett(this.testBruker)).thenReturn(this.testBrukerId);
@@ -39,6 +43,7 @@ public class TiltakinfoServiceTest {
 
     @Test
     public void skalOppretteOgReturnereBrukerDto() {
+        setup(brukerDto());
         BrukerDto brukerDtoFraDb = tiltakinfoService.opprettBruker(this.testBrukerDto);
 
         assertThat(brukerDtoFraDb.getFnr()).isEqualTo(this.testBrukerDto.getFnr());
@@ -48,15 +53,117 @@ public class TiltakinfoServiceTest {
         assertThat(brukerDtoFraDb.getTiltak()).isEqualTo(this.testBrukerDto.getTiltak());
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void skalKasteExceptionHvisOppretterBrukerUtenFnr() {
+        BrukerDto brukerDto = brukerDto().toBuilder().fnr(null).build();
+        setup(brukerDto);
+
+        tiltakinfoService.opprettBruker(brukerDto);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void skalKasteExceptionHvisOppretterBrukerUtenOppfolgingsEnhetId() {
+        BrukerDto brukerDto = brukerDto().toBuilder().oppfolgingsEnhetId(null).build();
+        setup(brukerDto);
+
+        tiltakinfoService.opprettBruker(brukerDto);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void skalKasteExceptionHvisOppretterBrukerUtenUnderOppfolging() {
+        BrukerDto brukerDto = brukerDto().toBuilder().underOppfolging(null).build();
+        setup(brukerDto);
+
+        tiltakinfoService.opprettBruker(brukerDto);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void skalKasteExceptionHvisOppretterBrukerOgTiltakErNull() {
+        BrukerDto brukerDto = brukerDto().toBuilder().tiltak(null).build();
+        setup(brukerDto);
+
+        tiltakinfoService.opprettBruker(brukerDto);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void skalKasteExceptionHvisOppretterBrukerOgTiltakErTomListe() {
+        BrukerDto brukerDto = brukerDto().toBuilder().tiltak(new ArrayList<TiltakDto>()).build();
+        setup(brukerDto);
+
+        tiltakinfoService.opprettBruker(brukerDto);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void skalKasteExceptionHvisOppretterBrukerMedEttTiltak() {
+        BrukerDto brukerDto = brukerDto().toBuilder().tiltak(singletonList(brukerDto().getTiltak().get(0))).build();
+        setup(brukerDto);
+
+        tiltakinfoService.opprettBruker(brukerDto);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void skalKasteExceptionHvisOppretterBrukerMedTreTiltak() {
+        BrukerDto brukerDto = brukerDto().toBuilder().tiltak(
+            Stream.concat(
+                brukerDto().getTiltak().stream(),
+                Stream.of(TiltakDto.builder().nokkel("tiltak-opplaering-ny-arbeidsgiver").build())).collect(toList())
+        ).build();
+        setup(brukerDto);
+
+        tiltakinfoService.opprettBruker(brukerDto);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void skalKasteExceptionHvisOppretterBrukerMedTiltakDerNokkelErTomStreng() {
+        BrukerDto brukerDto = brukerDto().toBuilder().tiltak(Arrays.asList(
+            TiltakDto.builder().nokkel("").build(),
+            TiltakDto.builder().nokkel("").build()
+        )).build();
+        setup(brukerDto);
+
+        tiltakinfoService.opprettBruker(brukerDto);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void skalKasteExceptionHvisOppretterBrukerMedTiltakDerNokkelErNull() {
+        BrukerDto brukerDto = brukerDto().toBuilder().tiltak(Arrays.asList(
+            TiltakDto.builder().nokkel(null).build(),
+            TiltakDto.builder().nokkel(null).build()
+        )).build();
+        setup(brukerDto);
+
+        tiltakinfoService.opprettBruker(brukerDto);
+    }
+
+    private String fnr = "11111111111";
+    private String oppfolgingsEnhetId = "0219";
+    private boolean underOppfolging = true;
+    private String maal = "Samme jobb";
+    private String forsteTiltak = "tiltak-tilrettelegging";
+    private String andreTiltak = "tiltak-arbeidsrettet-rehabilitering";
+
     private BrukerDto brukerDto() {
         return BrukerDto.builder()
-            .fnr("11111111111")
-            .oppfolgingsEnhetId("0219")
-            .underOppfolging(true)
-            .maal("Samme jobb")
+            .fnr(this.fnr)
+            .oppfolgingsEnhetId(this.oppfolgingsEnhetId)
+            .underOppfolging(this.underOppfolging)
+            .maal(this.maal)
             .tiltak(Arrays.asList(
-                TiltakDto.builder().nokkel("tiltak-tilrettelegging").build(),
-                TiltakDto.builder().nokkel("tiltak-arbeidsrettet-rehabilitering").build()
+                TiltakDto.builder().nokkel(this.forsteTiltak).build(),
+                TiltakDto.builder().nokkel(this.andreTiltak).build()
+            ))
+            .build();
+    }
+
+    private Bruker bruker() {
+        return Bruker.builder()
+            .fnr(this.fnr)
+            .oppfolgingsEnhetId(this.oppfolgingsEnhetId)
+            .underOppfolging(this.underOppfolging)
+            .maal(this.maal)
+            .tiltak(Arrays.asList(
+                Tiltak.builder().nokkel(this.forsteTiltak).build(),
+                Tiltak.builder().nokkel(this.andreTiltak).build()
             ))
             .build();
     }
