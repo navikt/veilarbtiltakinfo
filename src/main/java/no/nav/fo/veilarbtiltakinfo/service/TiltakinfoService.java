@@ -1,15 +1,19 @@
 package no.nav.fo.veilarbtiltakinfo.service;
 
+import no.nav.apiapp.feil.FeilType;
 import no.nav.fo.veilarbtiltakinfo.Mapper;
 import no.nav.fo.veilarbtiltakinfo.dao.BrukerDao;
 import no.nav.fo.veilarbtiltakinfo.dto.BrukerDto;
 import no.nav.fo.veilarbtiltakinfo.oppfolging.OppfolgingClient;
 import no.nav.fo.veilarbtiltakinfo.oppfolging.Oppfolgingsstatus;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
+import javax.ws.rs.WebApplicationException;
 
 import static java.util.Optional.of;
+import static java.util.Optional.ofNullable;
 
 @Component
 public class TiltakinfoService {
@@ -35,5 +39,17 @@ public class TiltakinfoService {
             .map(brukerId -> brukerDao.hent(brukerId))
             .map(Mapper::map)
             .get();
+    }
+
+    public boolean brukerHarSendtMeldingTilNavKontor(String fnr) {
+        return of(fnr)
+            .map(f -> {
+                try {
+                    return ofNullable(brukerDao.hent(f)).isPresent();
+                } catch (EmptyResultDataAccessException e) {
+                    return false;
+                }
+            })
+            .orElseThrow(() -> new WebApplicationException(FeilType.UGYLDIG_REQUEST.getStatus()));
     }
 }
