@@ -14,6 +14,12 @@ public class BrukerDto {
 
     @NotEmpty
     private String fnr;
+    @NotNull
+    private Boolean erSykmeldt;
+    @NotNull
+    private Boolean harArbeidsgiver;
+    @NotEmpty
+    private String servicegruppeKode;
     @NotEmpty
     private String oppfolgingsEnhetId;
     @NotNull

@@ -24,6 +24,9 @@ public class Mapper {
                 .underOppfolging(dto.getUnderOppfolging())
                 .maal(dto.getMaal())
                 .tiltak(tiltakDtos.stream().map(Mapper::map).collect(toList()))
+                .erSykmeldt(dto.getErSykmeldt())
+                .harArbeidsgiver(dto.getHarArbeidsgiver())
+                .serviceGruppeKode(dto.getServicegruppeKode())
                 .build())
             .map(ValidationUtils::validate)
             .orElseThrow(() -> new WebApplicationException(FeilType.UGYLDIG_HANDLING.getStatus()));
@@ -44,6 +47,9 @@ public class Mapper {
                 .underOppfolging(bruker.getUnderOppfolging())
                 .maal(bruker.getMaal())
                 .tiltak(bruker.getTiltak().stream().map(Mapper::map).collect(toList()))
+                .erSykmeldt(bruker.getErSykmeldt())
+                .harArbeidsgiver(bruker.getHarArbeidsgiver())
+                .servicegruppeKode(bruker.getServiceGruppeKode())
                 .build())
             .map(ValidationUtils::validate)
             .orElseThrow(() -> new WebApplicationException(FeilType.UGYLDIG_HANDLING.getStatus()));
