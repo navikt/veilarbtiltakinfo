@@ -106,6 +106,10 @@
             <artifactId>flyway-core</artifactId>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>no.nav.common</groupId>
+            <artifactId>metrics</artifactId>
+        </dependency>
 
 
         <!--Test-->
