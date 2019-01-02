@@ -7,6 +7,7 @@ import no.nav.fo.veilarbtiltakinfo.dto.BrukerDto;
 import no.nav.fo.veilarbtiltakinfo.dto.TiltakDto;
 import no.nav.fo.veilarbtiltakinfo.oppfolging.OppfolgingClient;
 import org.junit.Test;
+import org.springframework.dao.EmptyResultDataAccessException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -166,5 +167,25 @@ public class TiltakinfoServiceTest {
                 Tiltak.builder().nokkel(this.andreTiltak).build()
             ))
             .build();
+    }
+
+    @Test
+    public void skalReturnereTrueHvisBrukerFinnesIDatabase() {
+        BrukerDto brukerDto = brukerDto();
+        setup(brukerDto);
+
+        when(this.brukerDao.hent(brukerDto.getFnr())).thenReturn(this.testBruker);
+
+        assertThat(tiltakinfoService.brukerHarSendtMeldingTilNavKontor(brukerDto.getFnr())).isTrue();
+    }
+
+    @Test
+    public void skalReturnereFalseHvisBrukerIkkeFinnesIDatabase() {
+        BrukerDto brukerDto = brukerDto();
+        setup(brukerDto);
+
+        when(this.brukerDao.hent(brukerDto.getFnr())).thenThrow(EmptyResultDataAccessException.class);
+
+        assertThat(tiltakinfoService.brukerHarSendtMeldingTilNavKontor(brukerDto.getFnr())).isFalse();
     }
 }

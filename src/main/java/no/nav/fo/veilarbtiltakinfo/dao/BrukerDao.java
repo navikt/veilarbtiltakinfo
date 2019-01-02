@@ -55,7 +55,6 @@ public class BrukerDao {
         return of(brukerId)
             .map(id -> database.queryForObject("SELECT * FROM BRUKER WHERE bruker_id = ?", this::map, id))
             .map(bruker -> bruker.toBuilder().tiltak(tiltakDao.hentTiltakForBruker(bruker.getBrukerId())).build())
-            .map(ValidationUtils::validate)
             .orElseThrow(() -> new WebApplicationException(FeilType.UGYLDIG_HANDLING.getStatus()));
     }
 
@@ -69,5 +68,12 @@ public class BrukerDao {
             .underOppfolging(resultSet.getBoolean("under_oppfolging"))
             .maal(resultSet.getString("maal"))
             .build();
+    }
+
+    public Bruker hent(String fnr) {
+        return of(fnr)
+            .map(f -> database.queryForObject("SELECT * FROM BRUKER WHERE fnr = ?", this::map, f))
+            .map(bruker -> bruker.toBuilder().tiltak(tiltakDao.hentTiltakForBruker(bruker.getBrukerId())).build())
+            .orElseThrow(() -> new WebApplicationException(FeilType.FINNES_IKKE.getStatus()));
     }
 }
