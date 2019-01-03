@@ -2,6 +2,7 @@ package no.nav.fo.veilarbtiltakinfo.dao;
 
 import lombok.SneakyThrows;
 import no.nav.apiapp.feil.FeilType;
+import no.nav.fo.veilarbtiltakinfo.Metrikker;
 import no.nav.sbl.jdbc.Database;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,6 +51,8 @@ public class BrukerDao {
         );
 
         bruker.getTiltak().forEach(tiltak -> tiltakDao.opprett(brukerId, tiltak));
+
+        Metrikker.opprettetBruker(bruker);
 
         LOGGER.info("lagret bruker med id={}", brukerId);
 
