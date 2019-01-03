@@ -52,6 +52,9 @@ public class TiltakinfoServiceTest {
         assertThat(brukerDtoFraDb.getUnderOppfolging()).isEqualTo(this.testBrukerDto.getUnderOppfolging());
         assertThat(brukerDtoFraDb.getMaal()).isEqualTo(this.testBrukerDto.getMaal());
         assertThat(brukerDtoFraDb.getTiltak()).isEqualTo(this.testBrukerDto.getTiltak());
+        assertThat(brukerDtoFraDb.getErSykmeldt()).isEqualTo(this.testBrukerDto.getErSykmeldt());
+        assertThat(brukerDtoFraDb.getHarArbeidsgiver()).isEqualTo(this.testBrukerDto.getHarArbeidsgiver());
+        assertThat(brukerDtoFraDb.getServicegruppeKode()).isEqualTo(this.testBrukerDto.getServicegruppeKode());
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -142,6 +145,9 @@ public class TiltakinfoServiceTest {
     private String maal = "Samme jobb";
     private String forsteTiltak = "tiltak-tilrettelegging";
     private String andreTiltak = "tiltak-arbeidsrettet-rehabilitering";
+    private Boolean erSykmeldt = true;
+    private Boolean harArbeidsgiver = false;
+    private String servicegruppeKode = "BFORM";
 
     private BrukerDto brukerDto() {
         return BrukerDto.builder()
@@ -153,6 +159,9 @@ public class TiltakinfoServiceTest {
                 TiltakDto.builder().nokkel(this.forsteTiltak).build(),
                 TiltakDto.builder().nokkel(this.andreTiltak).build()
             ))
+            .erSykmeldt(this.erSykmeldt)
+            .harArbeidsgiver(this.harArbeidsgiver)
+            .servicegruppeKode(this.servicegruppeKode)
             .build();
     }
 
@@ -166,6 +175,9 @@ public class TiltakinfoServiceTest {
                 Tiltak.builder().nokkel(this.forsteTiltak).build(),
                 Tiltak.builder().nokkel(this.andreTiltak).build()
             ))
+            .erSykmeldt(this.erSykmeldt)
+            .harArbeidsgiver(this.harArbeidsgiver)
+            .serviceGruppeKode(this.servicegruppeKode)
             .build();
     }
 

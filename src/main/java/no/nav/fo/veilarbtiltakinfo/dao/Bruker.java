@@ -17,6 +17,12 @@ public class Bruker {
 
     @NotEmpty
     private String fnr;
+    @NotNull
+    private Boolean erSykmeldt;
+    @NotNull
+    private Boolean harArbeidsgiver;
+    @NotEmpty
+    private String serviceGruppeKode;
     @NotEmpty
     private String oppfolgingsEnhetId;
     @NotNull
