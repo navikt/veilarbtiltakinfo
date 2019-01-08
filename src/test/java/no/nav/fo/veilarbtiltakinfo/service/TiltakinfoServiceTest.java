@@ -188,7 +188,7 @@ public class TiltakinfoServiceTest {
 
         when(this.brukerDao.hent(brukerDto.getFnr())).thenReturn(this.testBruker);
 
-        assertThat(tiltakinfoService.brukerHarSendtMeldingTilNavKontor(brukerDto.getFnr())).isTrue();
+        assertThat(tiltakinfoService.brukerHarSendtMeldingTilNavKontor(brukerDto.getFnr()).getBrukerHarSendtMeldingTilNavKontor()).isTrue();
     }
 
     @Test
@@ -198,6 +198,6 @@ public class TiltakinfoServiceTest {
 
         when(this.brukerDao.hent(brukerDto.getFnr())).thenThrow(EmptyResultDataAccessException.class);
 
-        assertThat(tiltakinfoService.brukerHarSendtMeldingTilNavKontor(brukerDto.getFnr())).isFalse();
+        assertThat(tiltakinfoService.brukerHarSendtMeldingTilNavKontor(brukerDto.getFnr()).getBrukerHarSendtMeldingTilNavKontor()).isFalse();
     }
 }
