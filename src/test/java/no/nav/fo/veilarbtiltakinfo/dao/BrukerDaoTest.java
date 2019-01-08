@@ -3,6 +3,7 @@ package no.nav.fo.veilarbtiltakinfo.dao;
 import no.nav.fo.veilarbtiltakinfo.DatabaseTest;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 
@@ -92,12 +93,17 @@ public class BrukerDaoTest extends DatabaseTest {
         brukerDao.hent(bruker().getFnr());
     }
 
-    @Test(expected = IncorrectResultSizeDataAccessException.class)
-    public void skalKasteExceptionHvisDetFinnesFlereEnnEttInnslagAvBrukerIDatabase() {
+    @Test(expected = DuplicateKeyException.class)
+    public void skalKasteExceptionHvisBrukerFinnesFraFor() {
         Bruker bruker = bruker();
         brukerDao.opprett(bruker);
-        brukerDao.opprett(bruker.toBuilder().underOppfolging(false).build());
+        brukerDao.opprett(bruker.toBuilder().serviceGruppeKode("BFORM").build());
+    }
 
-        brukerDao.hent(bruker.getFnr());
+    @Test
+    public void skalOppretteToBrukereMedUlikFnr() {
+        Bruker bruker = bruker();
+        brukerDao.opprett(bruker);
+        brukerDao.opprett(bruker.toBuilder().fnr("2222222222").build());
     }
 }
