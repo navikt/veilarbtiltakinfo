@@ -4,6 +4,7 @@ import no.nav.apiapp.feil.FeilType;
 import no.nav.fo.veilarbtiltakinfo.Mapper;
 import no.nav.fo.veilarbtiltakinfo.dao.BrukerDao;
 import no.nav.fo.veilarbtiltakinfo.dto.BrukerDto;
+import no.nav.fo.veilarbtiltakinfo.dto.HarSendtMeldingDto;
 import no.nav.fo.veilarbtiltakinfo.oppfolging.OppfolgingClient;
 import no.nav.fo.veilarbtiltakinfo.oppfolging.Oppfolgingsstatus;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -41,13 +42,15 @@ public class TiltakinfoService {
             .get();
     }
 
-    public boolean brukerHarSendtMeldingTilNavKontor(String fnr) {
+    public HarSendtMeldingDto brukerHarSendtMeldingTilNavKontor(String fnr) {
         return of(fnr)
             .map(f -> {
                 try {
-                    return ofNullable(brukerDao.hent(f)).isPresent();
+                    return ofNullable(brukerDao.hent(f))
+                        .map(bruker -> HarSendtMeldingDto.builder().brukerHarSendtMeldingTilNavKontor(true).build())
+                        .orElseGet(() -> HarSendtMeldingDto.builder().brukerHarSendtMeldingTilNavKontor(false).build());
                 } catch (EmptyResultDataAccessException e) {
-                    return false;
+                    return HarSendtMeldingDto.builder().brukerHarSendtMeldingTilNavKontor(false).build();
                 }
             })
             .orElseThrow(() -> new WebApplicationException(FeilType.UGYLDIG_REQUEST.getStatus()));
