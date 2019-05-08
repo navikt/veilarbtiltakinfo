@@ -1,4 +1,4 @@
-import no.nav.dialogarena.config.fasit.FasitUtils;
+import no.nav.fasit.FasitUtils;
 import no.nav.fo.veilarbtiltakinfo.DatabaseTestContext;
 import no.nav.fo.veilarbtiltakinfo.SystemTestConfigurator;
 import no.nav.testconfig.ApiAppTest;
