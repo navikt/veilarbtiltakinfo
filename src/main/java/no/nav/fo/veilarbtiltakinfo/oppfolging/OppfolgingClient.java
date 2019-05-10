@@ -27,7 +27,7 @@ public class OppfolgingClient {
 
     public Oppfolgingsstatus oppfolgingsstatus(String fnr) {
         Oppfolgingsstatus oppfolgingsstatus = RestUtils.withClient(
-            c -> c.target(veilarboppfolgingTarget + "/person/" + fnr + "/oppfolgingsstatus"
+            c -> c.target(veilarboppfolgingTarget + "/person/" + fnr + "/oppfolgingsstatus?brukArena=true"
             )
                 .request()
                 .header(COOKIE, AZUREADB2C_OIDC_COOKIE_NAME + "=" + SubjectHandler.getSsoToken(OIDC).orElseThrow(IllegalArgumentException::new))
