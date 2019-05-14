@@ -9,6 +9,7 @@ import no.nav.fo.veilarbtiltakinfo.dao.TiltakDao;
 import no.nav.fo.veilarbtiltakinfo.oppfolging.OppfolgingClient;
 import no.nav.fo.veilarbtiltakinfo.oppfolging.OppfolgingClientHelseSjekk;
 import no.nav.fo.veilarbtiltakinfo.dao.BrukerDao;
+import no.nav.tjeneste.virksomhet.aktoer.v2.AktoerV2;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +30,7 @@ import javax.sql.DataSource;
         DataSourceHelsesjekk.class,
         BrukerDao.class,
         TiltakDao.class,
+        AktoerV2.class,
         AktorServiceImpl.class
 })
 public class ApplicationConfig implements ApiApplication {
