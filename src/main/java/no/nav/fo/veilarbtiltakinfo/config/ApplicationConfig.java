@@ -18,15 +18,16 @@ import javax.sql.DataSource;
 
 @Configuration
 @Import({
-    PepConfig.class,
-    OppfolgingClient.class,
-    OppfolgingClientHelseSjekk.class,
-    TiltakinfoService.class,
-    TiltakinfoRS.class,
-    DataSourceConfig.class,
-    DataSourceHelsesjekk.class,
-    BrukerDao.class,
-    TiltakDao.class,
+        PepConfig.class,
+        OppfolgingClient.class,
+        OppfolgingClientHelseSjekk.class,
+        TiltakinfoService.class,
+        TiltakinfoRS.class,
+        DataSourceConfig.class,
+        DataSourceHelsesjekk.class,
+        FeatureToggleConfig.class,
+        BrukerDao.class,
+        TiltakDao.class,
 })
 public class ApplicationConfig implements ApiApplication {
 
@@ -44,9 +45,9 @@ public class ApplicationConfig implements ApiApplication {
     @Override
     public void configure(ApiAppConfigurator apiAppConfigurator) {
         apiAppConfigurator
-            .sts()
-            .azureADB2CLogin()
-            .issoLogin()
+                .sts()
+                .azureADB2CLogin()
+                .issoLogin()
         ;
     }
 }
