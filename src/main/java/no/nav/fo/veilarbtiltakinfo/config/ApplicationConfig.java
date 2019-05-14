@@ -1,6 +1,6 @@
 package no.nav.fo.veilarbtiltakinfo.config;
 
-import no.nav.apiapp.ApiApplication.NaisApiApplication;
+import no.nav.apiapp.ApiApplication;
 import no.nav.apiapp.config.ApiAppConfigurator;
 import no.nav.fo.veilarbtiltakinfo.service.TiltakinfoService;
 import no.nav.fo.veilarbtiltakinfo.TiltakinfoRS;
@@ -28,7 +28,7 @@ import javax.sql.DataSource;
     BrukerDao.class,
     TiltakDao.class,
 })
-public class ApplicationConfig implements NaisApiApplication {
+public class ApplicationConfig implements ApiApplication {
 
     public static final String VEILARBLOGIN_REDIRECT_URL_URL = "VEILARBLOGIN_REDIRECT_URL_URL";
 
