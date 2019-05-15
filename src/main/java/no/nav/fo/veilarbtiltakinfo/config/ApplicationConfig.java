@@ -2,6 +2,7 @@ package no.nav.fo.veilarbtiltakinfo.config;
 
 import no.nav.apiapp.ApiApplication;
 import no.nav.apiapp.config.ApiAppConfigurator;
+import no.nav.dialogarena.aktor.AktorConfig;
 import no.nav.dialogarena.aktor.AktorServiceImpl;
 import no.nav.fo.veilarbtiltakinfo.service.TiltakinfoService;
 import no.nav.fo.veilarbtiltakinfo.TiltakinfoRS;
@@ -30,8 +31,7 @@ import javax.sql.DataSource;
         DataSourceHelsesjekk.class,
         BrukerDao.class,
         TiltakDao.class,
-        AktoerV2.class,
-        AktorServiceImpl.class
+        AktorConfig.class
 })
 public class ApplicationConfig implements ApiApplication {
 
