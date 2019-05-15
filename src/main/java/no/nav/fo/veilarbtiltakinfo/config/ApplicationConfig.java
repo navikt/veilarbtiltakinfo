@@ -10,6 +10,7 @@ import no.nav.fo.veilarbtiltakinfo.dao.TiltakDao;
 import no.nav.fo.veilarbtiltakinfo.oppfolging.OppfolgingClient;
 import no.nav.fo.veilarbtiltakinfo.oppfolging.OppfolgingClientHelseSjekk;
 import no.nav.fo.veilarbtiltakinfo.dao.BrukerDao;
+import no.nav.sbl.util.EnvironmentUtils;
 import no.nav.tjeneste.virksomhet.aktoer.v2.AktoerV2;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -36,6 +37,7 @@ import javax.sql.DataSource;
 public class ApplicationConfig implements ApiApplication {
 
     public static final String VEILARBLOGIN_REDIRECT_URL_URL = "VEILARBLOGIN_REDIRECT_URL_URL";
+    public static final String AKTOR_ENDPOINT_URL = "AKTOER_V2_ENDPOINTURL";
 
     @Inject
     private DataSource dataSource;
@@ -54,4 +56,9 @@ public class ApplicationConfig implements ApiApplication {
                 .issoLogin()
         ;
     }
+
+    public static String getAktorEndpointUrl() {
+        return EnvironmentUtils.getRequiredProperty(AKTOR_ENDPOINT_URL);
+    }
+
 }
