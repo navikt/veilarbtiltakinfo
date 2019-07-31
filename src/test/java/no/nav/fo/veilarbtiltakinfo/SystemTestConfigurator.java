@@ -1,19 +1,19 @@
 package no.nav.fo.veilarbtiltakinfo;
 
 import no.nav.brukerdialog.security.Constants;
-import no.nav.dialogarena.config.fasit.DbCredentials;
-import no.nav.dialogarena.config.fasit.FasitUtils;
-import no.nav.dialogarena.config.fasit.ServiceUser;
-import no.nav.dialogarena.config.util.Util;
+import no.nav.fasit.DbCredentials;
+import no.nav.fasit.FasitUtils;
+import no.nav.fasit.ServiceUser;
 import no.nav.fo.veilarbtiltakinfo.config.ApplicationConfig;
 import no.nav.sbl.dialogarena.common.abac.pep.CredentialConstants;
 import no.nav.sbl.dialogarena.common.cxf.StsSecurityConstants;
+import no.nav.testconfig.util.Util;
 
 import static java.lang.System.setProperty;
-import static no.nav.brukerdialog.security.oidc.provider.AzureADB2CConfig.AZUREAD_B2C_DISCOVERY_URL_PROPERTY_NAME;
-import static no.nav.brukerdialog.security.oidc.provider.AzureADB2CConfig.AZUREAD_B2C_EXPECTED_AUDIENCE_PROPERTY_NAME;
-import static no.nav.dialogarena.config.fasit.FasitUtils.Zone.FSS;
-import static no.nav.dialogarena.config.fasit.FasitUtils.getDefaultEnvironment;
+import static no.nav.brukerdialog.security.oidc.provider.AzureADB2CConfig.EXTERNAL_USERS_AZUREAD_B2C_DISCOVERY_URL;
+import static no.nav.brukerdialog.security.oidc.provider.AzureADB2CConfig.EXTERNAL_USERS_AZUREAD_B2C_EXPECTED_AUDIENCE;
+import static no.nav.fasit.FasitUtils.Zone.FSS;
+import static no.nav.fasit.FasitUtils.getDefaultEnvironment;
 import static no.nav.fo.veilarbtiltakinfo.oppfolging.OppfolgingClient.VEILARBOPPFOLGINGAPI_URL_PROPERTY_NAME;
 import static no.nav.sbl.dialogarena.common.abac.pep.service.AbacServiceConfig.ABAC_ENDPOINT_URL_PROPERTY_NAME;
 
@@ -33,13 +33,13 @@ public class SystemTestConfigurator {
         setProperty(StsSecurityConstants.SYSTEMUSER_PASSWORD, srvveilarbtiltakinfo.getPassword());
 
         ServiceUser azureADClientId = FasitUtils.getServiceUser("aad_b2c_clientid", APPLICATION_NAME);
-        Util.setProperty(AZUREAD_B2C_DISCOVERY_URL_PROPERTY_NAME, FasitUtils.getBaseUrl("aad_b2c_discovery"));
-        Util.setProperty(AZUREAD_B2C_EXPECTED_AUDIENCE_PROPERTY_NAME, azureADClientId.username);
+        Util.setProperty(EXTERNAL_USERS_AZUREAD_B2C_DISCOVERY_URL, FasitUtils.getBaseUrl("aad_b2c_discovery"));
+        Util.setProperty(EXTERNAL_USERS_AZUREAD_B2C_EXPECTED_AUDIENCE, azureADClientId.username);
 
         String issoJWS = FasitUtils.getBaseUrl("isso-jwks");
         String issoHost = FasitUtils.getBaseUrl("isso-host");
         ServiceUser isso_rp_user = FasitUtils.getServiceUser("isso-rp-user", APPLICATION_NAME);
-        String issoIsAlive = FasitUtils.getBaseUrl("isso.isalive", FasitUtils.Zone.FSS);
+        String issoIsAlive = FasitUtils.getBaseUrl("isso.isalive", FSS);
         String issoIssuer = FasitUtils.getBaseUrl("isso-issuer");
         setProperty(Constants.ISSO_JWKS_URL_PROPERTY_NAME, issoJWS);
         setProperty(Constants.ISSO_HOST_URL_PROPERTY_NAME, issoHost);

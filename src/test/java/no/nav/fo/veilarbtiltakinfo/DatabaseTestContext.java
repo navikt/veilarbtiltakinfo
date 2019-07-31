@@ -1,6 +1,6 @@
 package no.nav.fo.veilarbtiltakinfo;
 
-import no.nav.dialogarena.config.fasit.DbCredentials;
+import no.nav.fasit.DbCredentials;
 
 import static no.nav.fo.veilarbtiltakinfo.config.DataSourceConfig.*;
 
